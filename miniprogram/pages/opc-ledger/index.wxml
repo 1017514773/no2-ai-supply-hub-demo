@@ -1,0 +1,44 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <view class="card hero" wx:if="{{summary}}">
+    <view class="hero-subject">{{subject}}</view>
+    <view class="hero-num">¥{{fmt.yuan(summary.balanceFen)}}</view>
+    <view class="hero-label">当前结余</view>
+    <view class="hero-row">
+      <view class="hr-item">
+        <view class="hr-num">¥{{fmt.yuan(summary.incomeFen)}}</view>
+        <view class="hr-label">累计收入</view>
+      </view>
+      <view class="hr-item">
+        <view class="hr-num">-¥{{fmt.yuan(summary.expenseFen < 0 ? -summary.expenseFen : summary.expenseFen)}}</view>
+        <view class="hr-label">累计支出</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">
+      台账明细
+      <text class="muted">供 OPC 主体经营核算</text>
+    </view>
+    <view class="tr" wx:for="{{list}}" wx:key="voucherNo">
+      <view class="tr-head">
+        <text class="tr-type">{{item.type}}</text>
+        <text class="tr-amount {{item.positive ? 'pos' : 'neg'}}">{{item.amountText}}</text>
+      </view>
+      <view class="tr-meta">{{item.dateText}} · 凭证号 {{item.voucherNo}}</view>
+      <view class="tr-note">{{item.note}}</view>
+    </view>
+    <view wx:if="{{!loading && !list.length}}" class="muted">暂无记录</view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">导出台账</view>
+    <view class="muted">支持按当前口径导出 CSV（日期、类型、金额、凭证号、备注），可用于 OPC 主体经营留档。</view>
+    <button class="cta mt18" bindtap="onExport" aria-label="导出台账">
+      {{exporting ? '导出中…' : '导出 CSV'}}
+    </button>
+  </view>
+
+  <view class="disclaimer">台账金额以实际记录为准，不构成财税凭证。</view>
+</view>

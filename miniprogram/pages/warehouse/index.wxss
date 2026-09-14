@@ -1,0 +1,139 @@
+.page {
+  padding: 20rpx 28rpx 80rpx;
+}
+
+.head-title {
+  font-size: 36rpx;
+  font-weight: 900;
+}
+.head-sub {
+  font-size: 25rpx;
+  color: var(--green);
+  font-weight: 700;
+  margin: 6rpx 0 18rpx;
+}
+.stats .stat {
+  text-align: center;
+  background: #fbf8ef;
+  border: 1rpx solid var(--line);
+  border-radius: 18rpx;
+  padding: 18rpx 0;
+}
+.stats .num {
+  font-size: 40rpx;
+  font-weight: 900;
+  color: var(--green);
+}
+.stats .lb {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-top: 4rpx;
+}
+
+/* 仓库卡片 */
+.wh {
+  border: 1rpx solid var(--line);
+  border-radius: 20rpx;
+  padding: 22rpx;
+  margin-bottom: 18rpx;
+  background: #fbf8ef;
+}
+.wh.on {
+  border-color: var(--green);
+  background: #f1f6ee;
+}
+.wh-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+.wh-name-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  min-width: 0;
+}
+.wh-name {
+  font-size: 29rpx;
+  font-weight: 800;
+}
+.wh-default {
+  font-size: 22rpx;
+  color: #fff;
+  background: var(--green);
+  border-radius: 999rpx;
+  padding: 4rpx 16rpx;
+  flex-shrink: 0;
+}
+.wh-switching {
+  font-size: 22rpx;
+  color: var(--orange);
+  flex-shrink: 0;
+}
+.wh-meta {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-top: 10rpx;
+  line-height: 1.6;
+}
+.wh-stats {
+  font-size: 23rpx;
+  margin-top: 8rpx;
+}
+
+/* 城市覆盖 */
+.city-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 14rpx 0;
+  border-bottom: 1rpx dashed var(--line);
+}
+.city-row:last-of-type {
+  border-bottom: none;
+}
+.city-name {
+  font-weight: 800;
+  font-size: 27rpx;
+  min-width: 96rpx;
+}
+.city-names {
+  font-size: 23rpx;
+  color: var(--muted);
+}
+
+/* 组织与权限 */
+.role {
+  border: 1rpx solid var(--line);
+  border-radius: 18rpx;
+  padding: 18rpx 20rpx;
+  margin-bottom: 14rpx;
+  background: #fbf8ef;
+}
+.role.open {
+  border-color: var(--green);
+}
+.role-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.role-name {
+  font-size: 27rpx;
+  font-weight: 800;
+}
+.role-desc {
+  font-size: 23rpx;
+  color: var(--muted);
+  margin-top: 6rpx;
+}
+.role-mods {
+  margin-top: 12rpx;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+.role-mod {
+  margin-right: 0;
+}

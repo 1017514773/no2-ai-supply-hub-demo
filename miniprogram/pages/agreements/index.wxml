@@ -1,0 +1,14 @@
+<view class="page">
+  <view class="card doc" wx:for="{{docs}}" wx:key="id">
+    <view class="doc-head" data-id="{{item.id}}" bindtap="onToggle" aria-label="展开或收起 {{item.title}}">
+      <view class="doc-info">
+        <view class="doc-title">{{item.title}}</view>
+        <view class="doc-summary">{{item.summary}}</view>
+      </view>
+      <text class="doc-arrow {{openId === item.id ? 'open' : ''}}">›</text>
+    </view>
+    <view wx:if="{{openId === item.id}}" class="doc-body">{{item.body}}</view>
+  </view>
+
+  <view class="disclaimer">正式上线前以法务审核版本为准，并完成微信平台资质备案。</view>
+</view>

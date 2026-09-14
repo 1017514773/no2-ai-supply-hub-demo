@@ -1,0 +1,124 @@
+/* 底部留白 ≥ 自定义导航栏高度（112rpx + 安全区），避免内容被遮挡 */
+.page {
+  padding: 20rpx 28rpx 180rpx;
+}
+
+/* 顶部横幅 */
+.banner {
+  background: linear-gradient(135deg, #155c45, #1d7357);
+  color: #fff;
+  border: none;
+}
+.banner-title {
+  font-size: 34rpx;
+  font-weight: 800;
+}
+.banner-desc {
+  font-size: 24rpx;
+  opacity: 0.92;
+  margin: 12rpx 0 20rpx;
+  line-height: 1.6;
+}
+
+/* 筛选 */
+.tabs {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 22rpx;
+}
+.tab {
+  padding: 12rpx 34rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid var(--line);
+  background: var(--card);
+  font-size: 25rpx;
+  color: var(--muted);
+}
+.tab.on {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+  font-weight: 700;
+}
+
+/* 团购卡片 */
+.group {
+  padding: 26rpx;
+}
+.g-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 18rpx;
+}
+.g-emoji {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 20rpx;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.g-emoji .emoji {
+  font-size: 56rpx;
+}
+.g-info {
+  flex: 1;
+  min-width: 0;
+}
+.g-title {
+  font-size: 29rpx;
+  font-weight: 800;
+}
+.g-meta {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-top: 8rpx;
+  line-height: 1.5;
+}
+.g-count {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 23rpx;
+  color: var(--muted);
+}
+.g-cd {
+  display: inline-flex;
+  align-items: center;
+  gap: 6rpx;
+}
+.g-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx dashed var(--line);
+}
+.price .sym {
+  font-size: 24rpx;
+  color: var(--orange);
+  font-weight: 800;
+}
+.price .num {
+  font-size: 38rpx;
+  font-weight: 900;
+  color: var(--orange);
+}
+.price .unit {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-left: 4rpx;
+}
+.g-btn {
+  background: var(--green);
+  color: #fff;
+  font-size: 25rpx;
+  font-weight: 700;
+  padding: 14rpx 40rpx;
+  border-radius: 999rpx;
+}
+.g-btn.gray {
+  background: #e3dfd3;
+  color: var(--muted);
+}

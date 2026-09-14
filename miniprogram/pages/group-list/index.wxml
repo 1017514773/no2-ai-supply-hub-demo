@@ -1,0 +1,52 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <view class="banner card">
+    <view class="banner-title">社群团购 · 集采更省</view>
+    <view class="banner-desc">团长发起、满目标件数成团；支持平台代发 / 仓内寄存 / 到仓自提。</view>
+    <button class="cta alt small" bindtap="onCreate" aria-label="我要开团">＋ 我当团长来开团</button>
+  </view>
+
+  <view class="tabs">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="key"
+      class="tab {{activeTab === item.key ? 'on' : ''}}"
+      data-key="{{item.key}}"
+      bindtap="onSwitchTab"
+      aria-label="筛选 {{item.label}} 团购"
+    >{{item.label}}</view>
+  </view>
+
+  <view class="card group" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="onDetail">
+    <view class="g-head">
+      <view class="g-emoji {{item.product.visual}}"><text class="emoji">{{item.product.emoji}}</text></view>
+      <view class="g-info">
+        <view class="g-title">{{item.title}}</view>
+        <view class="g-meta">团长 {{item.leaderName}} · {{item.note}}</view>
+      </view>
+      <text class="pill {{item.pill}}">{{item.statusLabel}}</text>
+    </view>
+
+    <view class="progress"><view class="bar" style="width: {{item.progressPct}}%"></view></view>
+    <view class="g-count">
+      <text>已参团 {{item.joinedText}}</text>
+      <block wx:if="{{item.isOpen}}">
+        <text class="g-cd">距截团 <countdown endAt="{{item.endAt}}" size="sm" bind:end="onEnd" /></text>
+      </block>
+    </view>
+
+    <view class="g-foot">
+      <view class="price">
+        <text class="sym">¥</text><text class="num">{{item.priceText}}</text>
+        <text class="unit">/{{item.unit}}</text>
+      </view>
+      <view class="g-btn {{item.isOpen ? '' : 'gray'}}">{{item.actionText}}</view>
+    </view>
+  </view>
+
+  <view wx:if="{{!loading && !list.length}}" class="empty">
+    <text class="icon">✿</text>暂无相关团购
+  </view>
+
+  <view class="disclaimer">团购人数、价格以实际为准，不构成收益承诺。</view>
+</view>

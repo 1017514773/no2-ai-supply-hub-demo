@@ -1,0 +1,51 @@
+<view class="page">
+  <view class="card head">
+    <view class="head-title">库存流水</view>
+    <view class="head-sub">{{warehouse || '仓内'}} · 共 {{total}} 条记录</view>
+    <view class="muted">覆盖采购入库、下单预占、取消释放、出库扣减、寄存入库与盘点调整，与订单、寄存批次同源。</view>
+  </view>
+
+  <view class="tabs">
+    <view
+      class="tab {{tab === item.key ? 'on' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="key"
+      data-key="{{item.key}}"
+      bindtap="onTab"
+    >
+      {{item.label}}
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">
+      流水明细
+      <text class="muted">最新在前</text>
+    </view>
+    <view class="lg" wx:for="{{list}}" wx:key="id">
+      <view class="lg-head">
+        <view class="lg-left">
+          <text class="pill {{item.pill}}">{{item.typeLabel}}</text>
+          <text class="lg-name">{{item.productName}}</text>
+        </view>
+        <text class="lg-qty {{item.qty > 0 ? 'pos' : (item.qty < 0 ? 'neg' : '')}}">{{item.qtyText}}</text>
+      </view>
+      <view class="lg-meta">{{item.timeText}} · 关联单号 {{item.refNo || '-'}}</view>
+      <view class="lg-note" wx:if="{{item.note}}">{{item.note}}</view>
+    </view>
+    <view wx:if="{{!loading && !list.length}}" class="muted">该类型暂无流水</view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">库存核对</view>
+    <view class="muted">账实一致是履约底线。盘点结果写入流水并保留操作人与批次号，可在对账中心「库存账」复核。</view>
+    <view class="ops-panel">
+      <view class="t">后台操作 · 仓管视角</view>
+      <button class="cta" bindtap="onStocktake" aria-label="发起盘点">
+        {{stocktaking ? '盘点中…' : '发起现场盘点'}}
+      </button>
+    </view>
+  </view>
+
+  <view class="disclaimer">流水与库存实时联动，正式版对接 WMS / 进销存系统，支持按商品、单号、时间段检索。</view>
+</view>

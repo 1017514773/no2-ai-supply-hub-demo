@@ -1,0 +1,323 @@
+/* ===== AI Supply Hub 全局设计体系 =====
+ * 视觉基调：纸色底 / 墨绿 / 柠檬绿 / 橙
+ * 布局使用 rpx（750 设计稿），保证 390px 宽度正常使用。
+ */
+page {
+  --ink: #18342b;
+  --muted: #69746e;
+  --paper: #f7f3e8;
+  --card: #fffdf7;
+  --green: #155c45;
+  --lime: #dfe94f;
+  --orange: #e86832;
+  --line: #dcd6c7;
+  --shadow: 0 12rpx 30rpx rgba(24, 52, 43, 0.08);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+view, text, input, textarea, button, image, navigator {
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border-radius: 0;
+  font-size: 28rpx;
+  line-height: 1.5;
+  color: inherit;
+}
+button::after {
+  border: none;
+}
+
+/* ===== 布局工具 ===== */
+.page-pad {
+  padding: 24rpx 32rpx 48rpx;
+}
+.card {
+  background: var(--card);
+  border: 1rpx solid var(--line);
+  border-radius: 32rpx;
+  padding: 30rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(24, 52, 43, 0.05);
+}
+.card-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  border-bottom: 1rpx dashed var(--line);
+  font-size: 27rpx;
+}
+.row:last-child {
+  border-bottom: none;
+}
+.row .label {
+  color: var(--muted);
+}
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+}
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+}
+.flex {
+  display: flex;
+  align-items: center;
+}
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.grow {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ===== 文本 ===== */
+.muted {
+  color: var(--muted);
+  font-size: 23rpx;
+}
+.big-num {
+  font-size: 56rpx;
+  font-weight: 900;
+  line-height: 1.2;
+}
+.price-num {
+  color: var(--orange);
+  font-weight: 800;
+}
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.ellipsis2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+/* ===== 按钮 ===== */
+.cta {
+  width: 100%;
+  background: var(--green);
+  color: #fff;
+  border-radius: 18rpx;
+  padding: 22rpx 0;
+  text-align: center;
+  font-weight: 700;
+  font-size: 30rpx;
+}
+.cta.alt {
+  background: var(--lime);
+  color: var(--ink);
+}
+.cta.ghost {
+  background: transparent;
+  color: var(--green);
+  border: 2rpx solid var(--green);
+}
+.cta.small {
+  width: auto;
+  padding: 10rpx 28rpx;
+  font-size: 25rpx;
+  border-radius: 999rpx;
+  display: inline-block;
+}
+.cta.disabled {
+  opacity: 0.4;
+}
+.btn-hover {
+  opacity: 0.85;
+}
+
+/* ===== 标签 ===== */
+.pill {
+  display: inline-block;
+  padding: 4rpx 16rpx;
+  border-radius: 999rpx;
+  background: #edf1e2;
+  font-size: 21rpx;
+  color: var(--green);
+}
+.pill.ok {
+  color: var(--green);
+  background: #e4efe6;
+}
+.pill.warn {
+  color: var(--orange);
+  background: #f8e6dc;
+}
+.pill.gray {
+  color: var(--muted);
+  background: #ecebe4;
+}
+.tag {
+  display: inline-block;
+  background: var(--orange);
+  color: #fff;
+  border-radius: 10rpx;
+  padding: 2rpx 12rpx;
+  font-size: 20rpx;
+  margin-right: 8rpx;
+}
+.ok-text {
+  color: var(--green);
+  font-weight: 700;
+}
+.warn-text {
+  color: var(--orange);
+  font-weight: 700;
+}
+
+/* ===== 进度条 ===== */
+.progress {
+  height: 14rpx;
+  background: #e3dfd3;
+  border-radius: 999rpx;
+  overflow: hidden;
+  margin: 16rpx 0;
+}
+.progress .bar {
+  height: 100%;
+  background: var(--green);
+  border-radius: 999rpx;
+  transition: width 0.3s ease;
+}
+
+/* ===== 空状态 / 声明 ===== */
+.empty {
+  text-align: center;
+  padding: 100rpx 40rpx;
+  color: var(--muted);
+  font-size: 26rpx;
+}
+.empty .icon {
+  display: block;
+  font-size: 80rpx;
+  margin-bottom: 16rpx;
+}
+.disclaimer {
+  margin-top: 24rpx;
+  padding: 20rpx 24rpx;
+  border-radius: 20rpx;
+  background: #f2eddc;
+  border: 1rpx solid #d9c99b;
+  color: var(--muted);
+  font-size: 22rpx;
+  line-height: 1.7;
+}
+
+/* ===== 底部固定操作栏 ===== */
+.footer-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 16rpx 32rpx calc(16rpx + env(safe-area-inset-bottom));
+  background: rgba(255, 253, 247, 0.97);
+  border-top: 1rpx solid var(--line);
+}
+.footer-bar .total {
+  flex: 1;
+  font-size: 24rpx;
+  color: var(--muted);
+}
+.footer-bar .total .price-num {
+  font-size: 36rpx;
+}
+.footer-bar .cta {
+  width: 44%;
+}
+
+/* ===== 数量步进器 ===== */
+.stepper {
+  display: flex;
+  align-items: center;
+  border: 1rpx solid var(--line);
+  border-radius: 999rpx;
+  overflow: hidden;
+  background: #fff;
+}
+.stepper .op {
+  width: 56rpx;
+  height: 56rpx;
+  display: grid;
+  place-items: center;
+  font-size: 32rpx;
+  color: var(--ink);
+}
+.stepper .op.disabled {
+  color: #c8c5ba;
+}
+.stepper .qty {
+  min-width: 72rpx;
+  text-align: center;
+  font-size: 26rpx;
+  font-weight: 700;
+}
+
+/* ===== 弹层 ===== */
+.mask {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(12, 30, 24, 0.55);
+  display: flex;
+  align-items: flex-end;
+}
+.sheet {
+  width: 100%;
+  background: var(--card);
+  border-radius: 36rpx 36rpx 0 0;
+  padding: 40rpx 32rpx calc(40rpx + env(safe-area-inset-bottom));
+  max-height: 82vh;
+  overflow-y: auto;
+}
+.sheet-title {
+  font-size: 34rpx;
+  font-weight: 800;
+  margin-bottom: 12rpx;
+}
+
+/* ===== 后台操作区 ===== */
+.ops-panel {
+  margin-top: 24rpx;
+  border: 2rpx dashed var(--orange);
+  border-radius: 20rpx;
+  padding: 20rpx;
+  background: #fdf3ec;
+}
+.ops-panel .t {
+  color: var(--orange);
+  font-size: 22rpx;
+  font-weight: 700;
+  margin-bottom: 14rpx;
+}

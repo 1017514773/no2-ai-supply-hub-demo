@@ -1,0 +1,82 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page" wx:if="{{product}}">
+  <view class="visual {{product.visual}}">
+    <text wx:if="{{product.tags && product.tags[0]}}" class="tag">{{product.tags[0]}}</text>
+    <text class="emoji">{{product.emoji}}</text>
+  </view>
+
+  <view class="card">
+    <view class="price-line">
+      <text class="sym">¥</text>
+      <text class="price">{{fmt.yuan(product.priceFen)}}</text>
+      <text wx:if="{{product.originPriceFen}}" class="origin">¥{{fmt.yuan(product.originPriceFen)}}</text>
+    </view>
+    <view class="pname">{{product.name}}</view>
+    <view class="pspec">{{product.spec}}</view>
+    <view class="meta">
+      <text>库存 {{product.stock}} {{product.unit}}</text>
+      <text>已售 {{product.sales}}</text>
+      <text wx:if="{{product.limitPerUser}}" class="tag-inline limit">每账号限购 {{product.limitPerUser}} 件</text>
+      <text wx:for="{{product.tags}}" wx:key="*this" class="tag-inline">{{item}}</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">规格</view>
+    <view class="specs">
+      <view
+        wx:for="{{product.specOptions}}"
+        wx:key="*this"
+        class="spec {{specIndex === index ? 'on' : ''}}"
+        data-index="{{index}}"
+        bindtap="onSpec"
+        aria-label="选择规格 {{item}}"
+      >{{item}}</view>
+    </view>
+    <view class="row">
+      <text class="label">购买数量</text>
+      <view class="stepper">
+        <view class="op {{qty <= 1 ? 'disabled' : ''}}" bindtap="onMinus" aria-label="减少数量">−</view>
+        <view class="qty">{{qty}}</view>
+        <view class="op" bindtap="onPlus" aria-label="增加数量">+</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">履约方式（下单时选择）</view>
+    <view class="frow" wx:for="{{fulfillmentRows}}" wx:key="key">
+      <text class="f-label">{{item.label}}</text>
+      <text class="f-desc">{{item.desc}}</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">商品说明</view>
+    <view class="desc-line" wx:for="{{product.desc}}" wx:key="*this">· {{item}}</view>
+    <view class="muted" style="margin-top: 16rpx;">金额口径：下单前以订单确认页为准。</view>
+  </view>
+
+  <view class="card" wx:if="{{product.detailSections && product.detailSections.length}}">
+    <view class="card-title">图文详情</view>
+    <view class="sec" wx:for="{{product.detailSections}}" wx:key="title">
+      <view class="sec-visual {{item.visual}}">
+        <text class="sec-emoji">{{item.emoji}}</text>
+      </view>
+      <view class="sec-title">{{item.title}}</view>
+      <view class="sec-text">{{item.text}}</view>
+    </view>
+  </view>
+
+  <view class="footer-bar">
+    <view class="cart-btn" bindtap="onGoCart" aria-label="购物车">
+      <view class="c-icon">
+        <view class="handle"></view>
+        <view class="body"></view>
+      </view>
+      <text class="c-txt">购物车</text>
+    </view>
+    <button class="cta alt" bindtap="onAddCart" aria-label="加入购物车">加入购物车</button>
+    <button class="cta" bindtap="onBuyNow" aria-label="立即购买">立即购买</button>
+  </view>
+</view>

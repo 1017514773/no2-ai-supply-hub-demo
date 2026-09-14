@@ -1,0 +1,102 @@
+.page {
+  padding: 20rpx 28rpx 80rpx;
+}
+
+.tabs {
+  white-space: nowrap;
+  margin-bottom: 22rpx;
+}
+.tab {
+  display: inline-block;
+  padding: 12rpx 30rpx;
+  margin-right: 16rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid var(--line);
+  background: var(--card);
+  font-size: 25rpx;
+  color: var(--muted);
+}
+.tab.on {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+  font-weight: 700;
+}
+
+/* 汇总条 */
+.total-bar {
+  display: flex;
+  padding: 24rpx 10rpx;
+}
+.tb-item {
+  flex: 1;
+  text-align: center;
+  border-right: 1rpx dashed var(--line);
+}
+.tb-item:last-child {
+  border-right: none;
+}
+.tb-num {
+  font-size: 27rpx;
+  font-weight: 900;
+}
+.tb-label {
+  font-size: 20rpx;
+  color: var(--muted);
+  margin-top: 6rpx;
+}
+
+/* 流水卡 */
+.cm {
+  padding: 24rpx;
+}
+.cm-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cm-left {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+.cm-type {
+  font-size: 27rpx;
+  font-weight: 800;
+}
+.cm-amount {
+  font-size: 30rpx;
+  font-weight: 900;
+  color: var(--green);
+}
+.cm-amount.neg {
+  color: var(--orange);
+}
+.cm-meta {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-top: 10rpx;
+}
+.cm-explain {
+  font-size: 23rpx;
+  color: #4a4a44;
+  background: #f4f0e4;
+  border-radius: 12rpx;
+  padding: 14rpx 16rpx;
+  margin-top: 14rpx;
+  line-height: 1.55;
+}
+.cm-foot {
+  font-size: 21rpx;
+  color: var(--muted);
+  margin-top: 10rpx;
+}
+.cm-foot.warn {
+  color: var(--orange);
+}
+.cm-ops {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  margin-top: 14rpx;
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "上海宝山",
+  "usingComponents": {
+    "product-card": "/components/product-card/index"
+  }
+}

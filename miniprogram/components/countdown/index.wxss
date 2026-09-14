@@ -1,0 +1,19 @@
+.countdown {
+  display: inline-flex;
+  align-items: center;
+}
+.countdown .num {
+  font-weight: 800;
+  color: var(--orange);
+  font-variant-numeric: tabular-nums;
+}
+.countdown.sm .num {
+  font-size: 26rpx;
+}
+.countdown.lg .num {
+  font-size: 48rpx;
+  letter-spacing: 2rpx;
+}
+.countdown.over .num {
+  color: var(--muted);
+}

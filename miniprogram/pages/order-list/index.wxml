@@ -1,0 +1,40 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <scroll-view scroll-x class="tabs" enhanced show-scrollbar="{{false}}">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="key"
+      class="tab {{activeTab === item.key ? 'on' : ''}}"
+      data-key="{{item.key}}"
+      bindtap="onSwitchTab"
+      aria-label="筛选 {{item.label}} 订单"
+    >{{item.label}}</view>
+  </scroll-view>
+
+  <view class="card order" wx:for="{{list}}" wx:key="id">
+    <view class="o-head" data-id="{{item.id}}" bindtap="onDetail">
+      <text class="o-no">{{item.orderNo}}</text>
+      <text class="pill {{item.pill}}">{{item.statusLabel}}</text>
+    </view>
+    <view class="o-body" data-id="{{item.id}}" bindtap="onDetail">
+      <text class="o-emoji">{{item.itemEmojis}}</text>
+      <view class="o-info">
+        <view class="o-title">{{item.items[0].name}}{{item.items.length > 1 ? ' 等 ' + item.items.length + ' 种商品' : ''}}</view>
+        <view class="o-meta">{{item.createdText}} · {{item.fulfillmentLabel}} · 共{{item.itemCount}}件</view>
+      </view>
+      <view class="o-amount">¥{{fmt.yuan(item.payableFen)}}</view>
+    </view>
+    <view class="o-actions">
+      <button wx:if="{{item.canCancel}}" class="cta small ghost" data-id="{{item.id}}" catchtap="onCancel" aria-label="取消订单">取消订单</button>
+      <button wx:if="{{item.canPay}}" class="cta small" data-id="{{item.id}}" catchtap="onPay" aria-label="去支付">去支付</button>
+      <button wx:if="{{item.canConfirm}}" class="cta small" data-id="{{item.id}}" catchtap="onConfirm" aria-label="确认收货">确认收货</button>
+      <button class="cta small ghost" data-id="{{item.id}}" catchtap="onDetail" aria-label="查看详情">查看详情</button>
+    </view>
+  </view>
+
+  <view wx:if="{{!loading && !list.length}}" class="empty">
+    <text class="icon">📦</text>暂无相关订单
+  </view>
+
+  <pay-sheet show="{{showPay}}" order="{{payOrder}}" bind:success="onPaySuccess" bind:close="onPayClose" />
+</view>

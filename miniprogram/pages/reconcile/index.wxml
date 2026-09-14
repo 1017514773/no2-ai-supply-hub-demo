@@ -1,0 +1,199 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <block wx:if="{{res}}">
+    <view class="card hero">
+      <view class="hero-label">对账中心 · 已支付订单总额</view>
+      <view class="hero-num">¥{{fmt.yuan(res.orders.gmvFen)}}</view>
+      <view class="hero-sub">订单 {{res.orders.paidCount}} 单 · 可计入业绩 ¥{{fmt.yuan(res.orders.countableAmountFen)}}</view>
+      <view class="hero-meta">口径时间 {{res.generatedText}} · 导出 CSV 与页面同源</view>
+    </view>
+
+    <view class="tabs">
+      <view
+        class="tab {{tab === item.key ? 'on' : ''}}"
+        wx:for="{{tabs}}"
+        wx:key="key"
+        data-key="{{item.key}}"
+        bindtap="onTab"
+      >
+        {{item.label}}
+      </view>
+    </view>
+
+    <!-- 订单账 -->
+    <block wx:if="{{tab === 'orders'}}">
+      <view class="card">
+        <view class="card-title">订单账汇总</view>
+        <view class="grid2">
+          <view class="m-item">
+            <view class="m-num">{{res.orders.paidCount}}</view>
+            <view class="m-label">已支付订单</view>
+          </view>
+          <view class="m-item">
+            <view class="m-num">¥{{fmt.yuan(res.orders.gmvFen)}}</view>
+            <view class="m-label">订单总额（实付）</view>
+          </view>
+          <view class="m-item">
+            <view class="m-num">¥{{fmt.yuan(res.orders.productAmountFen)}}</view>
+            <view class="m-label">商品金额</view>
+          </view>
+          <view class="m-item">
+            <view class="m-num">¥{{fmt.yuan(res.orders.freightFen)}}</view>
+            <view class="m-label">运费</view>
+          </view>
+        </view>
+        <view class="row">
+          <text class="label">可计入业绩（{{res.orders.countableCount}} 单）</text>
+          <text class="ok-text">¥{{fmt.yuan(res.orders.countableAmountFen)}}</text>
+        </view>
+      </view>
+      <view class="card">
+        <view class="card-title">订单明细</view>
+        <view class="tr" wx:for="{{res.orders.rows}}" wx:key="orderNo">
+          <view class="tr-head">
+            <text class="tr-type">{{item.orderNo}}</text>
+            <text class="tr-amount pos">¥{{fmt.yuan(item.payableFen)}}</text>
+          </view>
+          <view class="tr-meta">{{item.statusLabel}} · {{item.paidText}}</view>
+          <view class="tr-note">计入集采业绩：{{item.countable ? '是' : '否'}}</view>
+        </view>
+        <view wx:if="{{!res.orders.rows.length}}" class="muted">暂无已支付订单</view>
+      </view>
+    </block>
+
+    <!-- 退款账 -->
+    <block wx:if="{{tab === 'refunds'}}">
+      <view class="card">
+        <view class="card-title">退款账汇总</view>
+        <view class="grid3">
+          <view class="m-item">
+            <view class="m-num">{{res.refunds.count}}</view>
+            <view class="m-label">退款单数</view>
+          </view>
+          <view class="m-item">
+            <view class="m-num">¥{{fmt.yuan(res.refunds.amountFen)}}</view>
+            <view class="m-label">退款总额</view>
+          </view>
+          <view class="m-item">
+            <view class="m-num">{{res.refunds.ratePct}}%</view>
+            <view class="m-label">退款率</view>
+          </view>
+        </view>
+        <view class="muted">退款率 = 退款总额 ÷ 订单总额；退款订单自动从集采业绩与佣金口径中剔除。</view>
+      </view>
+      <view class="card">
+        <view class="card-title">退款明细</view>
+        <view class="tr" wx:for="{{res.refunds.rows}}" wx:key="id">
+          <view class="tr-head">
+            <text class="tr-type">{{item.orderNo}}</text>
+            <text class="tr-amount neg">-¥{{fmt.yuan(item.amountFen)}}</text>
+          </view>
+          <view class="tr-meta">{{item.reason}} · {{item.reviewedText}}</view>
+          <view class="tr-note">退款单号 {{item.refundNo}}</view>
+        </view>
+        <view wx:if="{{!res.refunds.rows.length}}" class="muted">暂无退款记录</view>
+      </view>
+    </block>
+
+    <!-- 佣金账 -->
+    <block wx:if="{{tab === 'commissions'}}">
+      <view class="card">
+        <view class="card-title">
+          佣金账汇总
+          <text class="muted">与收益看板同口径</text>
+        </view>
+        <view class="grid2">
+          <view class="m-item">
+            <view class="m-num">¥{{fmt.yuan(res.commissions.estimatedFen)}}</view>
+            <view class="m-label">预计佣金</view>
+          </view>
+          <view class="m-item">
+            <view class="m-num">¥{{fmt.yuan(res.commissions.readyFen)}}</view>
+            <view class="m-label">可结算</view>
+          </view>
+          <view class="m-item">
+            <view class="m-num">¥{{fmt.yuan(res.commissions.frozenFen)}}</view>
+            <view class="m-label">冻结中</view>
+          </view>
+          <view class="m-item">
+            <view class="m-num">¥{{fmt.yuan(res.commissions.settledFen)}}</view>
+            <view class="m-label">已结算</view>
+          </view>
+        </view>
+        <view class="row">
+          <text class="label">已冲销（退款剔除）</text>
+          <text class="warn-text">¥{{fmt.yuan(res.commissions.reversedFen)}}</text>
+        </view>
+      </view>
+      <view class="card">
+        <view class="card-title">佣金明细</view>
+        <view class="tr" wx:for="{{res.commissions.rows}}" wx:key="id">
+          <view class="tr-head">
+            <text class="tr-type">{{item.typeLabel}}</text>
+            <text class="tr-amount {{item.negative ? 'neg' : 'pos'}}">{{item.amountText}}</text>
+          </view>
+          <view class="tr-meta">{{item.statusLabel}} · {{item.createdText}}</view>
+          <view class="tr-note">关联订单 {{item.orderNo}}</view>
+        </view>
+        <view wx:if="{{!res.commissions.rows.length}}" class="muted">暂无佣金流水</view>
+      </view>
+    </block>
+
+    <!-- 库存账 -->
+    <block wx:if="{{tab === 'inventory'}}">
+      <view class="card">
+        <view class="card-title">库存账汇总</view>
+        <view class="grid3">
+          <view class="m-item">
+            <view class="m-num">{{res.inventory.skuCount}}</view>
+            <view class="m-label">在售 SKU</view>
+          </view>
+          <view class="m-item">
+            <view class="m-num">{{res.inventory.stockQty}}</view>
+            <view class="m-label">在库件数</view>
+          </view>
+          <view class="m-item">
+            <view class="m-num">{{res.inventory.reservedQty}}</view>
+            <view class="m-label">预占件数</view>
+          </view>
+          <view class="m-item">
+            <view class="m-num">{{res.inventory.availableQty}}</view>
+            <view class="m-label">可用件数</view>
+          </view>
+          <view class="m-item">
+            <view class="m-num">{{res.inventory.lotCount}}</view>
+            <view class="m-label">寄存批次</view>
+          </view>
+          <view class="m-item">
+            <view class="m-num">{{res.inventory.lotRemainQty}}</view>
+            <view class="m-label">寄存剩余</view>
+          </view>
+        </view>
+        <view class="muted">可用件数 = 在库 − 预占；寄存批次为分销员仓内寄存余量。</view>
+      </view>
+      <view class="card">
+        <view class="card-title">SKU 明细</view>
+        <view class="tr" wx:for="{{res.inventory.rows}}" wx:key="rid">
+          <view class="tr-head">
+            <text class="tr-type">{{item.name}}</text>
+            <text class="tr-amount">库存 {{item.stock}}{{item.unit}}</text>
+          </view>
+          <view class="tr-meta">预占 {{item.reserved}} · 可用 {{item.available}} · {{item.spec}}</view>
+        </view>
+      </view>
+    </block>
+
+    <view class="card">
+      <view class="card-title">导出对账数据</view>
+      <view class="muted">CSV 与页面汇总同源生成，包含四账汇总与订单 / 退款 / 佣金 / 库存明细，可直接留档核对。</view>
+      <button class="cta mt18" bindtap="onExport">{{exporting ? '生成中…' : '导出 CSV'}}</button>
+    </view>
+
+    <view class="disclaimer">数据与后台汇总同源，金额以实际记录为准，不构成财税凭证。正式版将对接财务系统并支持 XLSX 下载。</view>
+  </block>
+
+  <view wx:else class="empty">
+    <text class="icon">☰</text>
+    {{loading ? '加载中…' : '暂无对账数据'}}
+  </view>
+</view>

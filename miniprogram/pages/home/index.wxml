@@ -1,0 +1,87 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <view class="top">
+    <view class="brand">
+      <view class="mark">{{brandMark}}</view>
+      <view>
+        <view class="bname">{{appName}}</view>
+        <view class="bsub">{{appSubName}}</view>
+      </view>
+    </view>
+    <view class="cart-entry" bindtap="onGoCart" aria-label="购物车，共{{cartCount}}件">
+      <view class="cart-icon">
+        <view class="handle"></view>
+        <view class="body"></view>
+      </view>
+      <view wx:if="{{cartCount > 0}}" class="badge">{{cartCount}}</view>
+    </view>
+  </view>
+
+  <view class="searchbar" bindtap="onSearchTap" aria-label="搜索商品">
+    <text class="s-icon">⌕</text>
+    <text class="s-ph">搜索源头好货：蓝莓、大米、家清…</text>
+  </view>
+
+  <view class="hero">
+    <view class="eyebrow">{{heroEyebrow}}</view>
+    <view class="hero-title">源头好货 · 全民共享经营</view>
+    <view class="hero-desc">集采、团购、分销一站完成。让厂家动销，让百姓省钱，让残友居家增收。</view>
+    <view class="stats">
+      <view class="stat"><text class="num">{{overview.todayOrders}}</text><text class="lb">今日集采单</text></view>
+      <view class="stat"><text class="num">¥{{fmt.wan(overview.todayGmvFen)}}</text><text class="lb">今日成交额</text></view>
+      <view class="stat"><text class="num">{{overview.cities}}城</text><text class="lb">服务覆盖</text></view>
+    </view>
+    <view class="hero-note">数据实时统计更新</view>
+  </view>
+
+  <view class="quick">
+    <view class="qitem" data-key="group" bindtap="onQuick" aria-label="今日团购">
+      <view class="icon">👥</view><text>今日团购</text>
+    </view>
+    <view class="qitem" data-key="share" bindtap="onQuick" aria-label="分享赚">
+      <view class="icon">📣</view><text>分享赚</text>
+    </view>
+    <view class="qitem" data-key="agent" bindtap="onQuick" aria-label="分销中心">
+      <view class="icon">🧑‍💼</view><text>分销中心</text>
+    </view>
+    <view class="qitem" data-key="consign" bindtap="onQuick" aria-label="仓内寄存">
+      <view class="icon">🏬</view><text>仓内寄存</text>
+    </view>
+  </view>
+
+  <view class="section-head">
+    <text class="section-title">今日保供好货</text>
+    <text class="muted">{{products.length}} 件在售</text>
+  </view>
+
+  <scroll-view scroll-x class="chips" enhanced show-scrollbar="{{false}}">
+    <view class="chip {{activeCategory === '' ? 'on' : ''}}" data-id="" bindtap="onCategory">全部</view>
+    <view
+      wx:for="{{categories}}"
+      wx:key="id"
+      class="chip {{activeCategory === item.id ? 'on' : ''}}"
+      data-id="{{item.id}}"
+      bindtap="onCategory"
+    >{{item.emoji}} {{item.name}}</view>
+  </scroll-view>
+
+  <view class="products">
+    <product-card
+      wx:for="{{products}}"
+      wx:key="id"
+      product="{{item}}"
+      bind:add="onAddToCart"
+    />
+  </view>
+  <view wx:if="{{!loading && !products.length}}" class="empty">
+    <text class="icon">🍃</text>该分类暂无在售商品
+  </view>
+
+  <view class="mission">
+    <text class="badge">🦽</text>
+    <view>
+      <view class="m-t">拥军助残 · 每一单都有温度</view>
+      <view class="m-d">平台优先为残障人士提供远程客服、选品、社群运营等就业岗位。</view>
+    </view>
+  </view>
+</view>

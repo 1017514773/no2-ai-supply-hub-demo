@@ -1,0 +1,99 @@
+.page {
+  padding: 20rpx 28rpx 80rpx;
+}
+
+/* 状态卡 */
+.status-card {
+  background: linear-gradient(135deg, #155c45, #1d7357);
+  color: #fff;
+  border: none;
+}
+.s-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.s-top .muted {
+  color: rgba(255, 255, 255, 0.8);
+}
+.s-title {
+  font-size: 32rpx;
+  font-weight: 800;
+  margin: 18rpx 0 10rpx;
+}
+.frozen-tip {
+  margin-top: 16rpx;
+  padding: 16rpx 20rpx;
+  border-radius: 14rpx;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1rpx solid rgba(255, 255, 255, 0.35);
+  font-size: 23rpx;
+  line-height: 1.6;
+}
+
+.item-line {
+  font-size: 25rpx;
+  line-height: 1.7;
+}
+.strong {
+  font-weight: 800;
+  color: var(--green);
+}
+.p-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 25rpx;
+  margin-bottom: 10rpx;
+}
+
+/* 表单 */
+.field {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  border-bottom: 1rpx solid var(--line);
+  padding: 18rpx 4rpx;
+}
+.f-label {
+  width: 150rpx;
+  color: var(--muted);
+  font-size: 25rpx;
+  flex-shrink: 0;
+}
+.f-input {
+  flex: 1;
+  font-size: 26rpx;
+}
+.mt {
+  margin-top: 20rpx;
+}
+.ops {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+/* 日志 */
+.log {
+  padding: 18rpx 0;
+  border-bottom: 1rpx dashed var(--line);
+}
+.log:last-child {
+  border-bottom: none;
+}
+.log-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.log-action {
+  font-weight: 800;
+  font-size: 26rpx;
+}
+.log-detail {
+  font-size: 24rpx;
+  color: #4a4a44;
+  line-height: 1.6;
+  margin: 8rpx 0;
+}

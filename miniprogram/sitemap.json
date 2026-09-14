@@ -1,0 +1,9 @@
+{
+  "desc": "AI Supply Hub 小程序，全部页面允许被索引",
+  "rules": [
+    {
+      "action": "allow",
+      "page": "*"
+    }
+  ]
+}

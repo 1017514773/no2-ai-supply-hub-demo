@@ -1,0 +1,81 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <block wx:if="{{res && cur}}">
+    <view class="card hero">
+      <view class="hero-label">{{tab === 'today' ? '今日' : (tab === 'week' ? '近 7 日' : '近 30 日')}}成交额（GMV）</view>
+      <view class="hero-num">¥{{fmt.yuan(cur.gmvFen)}}</view>
+      <view class="hero-sub">订单 {{cur.orders}} 单 · 退款 {{cur.refundCount}} 单</view>
+      <view class="hero-meta">更新于 {{updatedText}} · 数据与订单 / 退款 / 佣金流水同源</view>
+    </view>
+
+    <view class="tabs">
+      <view
+        class="tab {{tab === item.key ? 'on' : ''}}"
+        wx:for="{{tabs}}"
+        wx:key="key"
+        data-key="{{item.key}}"
+        bindtap="onTab"
+      >
+        {{item.label}}
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">
+        {{tab === 'today' ? '今日' : (tab === 'week' ? '近 7 日' : '近 30 日')}}核心指标
+        <text class="muted">实时聚合</text>
+      </view>
+      <view class="grid2">
+        <view class="m-item">
+          <view class="m-num">{{cur.orders}}</view>
+          <view class="m-label">订单数</view>
+        </view>
+        <view class="m-item">
+          <view class="m-num">¥{{fmt.yuan(cur.gmvFen)}}</view>
+          <view class="m-label">成交额</view>
+        </view>
+        <view class="m-item">
+          <view class="m-num">{{cur.refundCount}}</view>
+          <view class="m-label">退款单数</view>
+        </view>
+        <view class="m-item">
+          <view class="m-num">¥{{fmt.yuan(cur.refundFen)}}</view>
+          <view class="m-label">退款金额</view>
+        </view>
+        <view class="m-item">
+          <view class="m-num">¥{{fmt.yuan(cur.commissionFen)}}</view>
+          <view class="m-label">已结算佣金</view>
+        </view>
+        <view class="m-item">
+          <view class="m-num">{{cur.groupOrders}}</view>
+          <view class="m-label">团购订单</view>
+        </view>
+      </view>
+      <view class="row">
+        <text class="label">团购件数</text>
+        <text class="ok-text">{{cur.groupQty}} 件</text>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">
+        近 7 日成交额走势
+        <text class="muted">单位：万元</text>
+      </view>
+      <view class="bars">
+        <view class="bar-col" wx:for="{{bars}}" wx:key="label">
+          <text class="bar-val">{{fmt.wan(item.gmvFen)}}</text>
+          <view class="bar-fill {{item.isToday ? 'today' : ''}}" style="height: {{item.heightPct}}%"></view>
+          <text class="bar-label">{{item.label}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="disclaimer">看板为经营统计口径（日 / 周 / 月），与对账中心、收益看板数字同源；数据每日结算后更新，不构成经营承诺，正式版按经营周期出具报表。</view>
+  </block>
+
+  <view wx:else class="empty">
+    <text class="icon">◫</text>
+    {{loading ? '加载中…' : '暂无看板数据'}}
+  </view>
+</view>

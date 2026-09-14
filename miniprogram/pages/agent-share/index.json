@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "推广码 / 分享",
+  "usingComponents": {
+    "promo-qr": "/components/promo-qr/index"
+  }
+}

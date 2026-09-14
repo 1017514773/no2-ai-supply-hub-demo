@@ -1,0 +1,198 @@
+.page {
+  padding: 20rpx 28rpx 200rpx;
+}
+.visual {
+  height: 460rpx;
+  border-radius: 36rpx;
+  display: grid;
+  place-items: center;
+  position: relative;
+  background: #ece8d8;
+  margin-bottom: 24rpx;
+}
+.visual.orange {
+  background: #f3d8c9;
+}
+.visual.green {
+  background: #d9e4d8;
+}
+.visual .emoji {
+  font-size: 220rpx;
+  line-height: 1;
+}
+.visual .tag {
+  position: absolute;
+  left: 24rpx;
+  top: 24rpx;
+  background: var(--orange);
+  color: #fff;
+  border-radius: 12rpx;
+  padding: 4rpx 18rpx;
+  font-size: 22rpx;
+}
+.price-line {
+  display: flex;
+  align-items: baseline;
+  color: var(--orange);
+  font-weight: 800;
+}
+.price-line .sym {
+  font-size: 28rpx;
+}
+.price-line .price {
+  font-size: 52rpx;
+}
+.price-line .origin {
+  margin-left: 16rpx;
+  color: #b3ada0;
+  font-size: 24rpx;
+  font-weight: 400;
+  text-decoration: line-through;
+}
+.pname {
+  font-size: 36rpx;
+  font-weight: 800;
+  margin-top: 10rpx;
+  line-height: 1.4;
+}
+.pspec {
+  color: var(--muted);
+  font-size: 25rpx;
+  margin-top: 6rpx;
+}
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  margin-top: 18rpx;
+  color: var(--muted);
+  font-size: 22rpx;
+  flex-wrap: wrap;
+}
+.tag-inline {
+  background: #e4efe6;
+  color: var(--green);
+  border-radius: 8rpx;
+  padding: 2rpx 12rpx;
+  font-size: 20rpx;
+}
+.tag-inline.limit {
+  background: #f8e6dc;
+  color: var(--orange);
+  font-weight: 700;
+}
+.specs {
+  display: flex;
+  gap: 18rpx;
+  flex-wrap: wrap;
+  margin-bottom: 10rpx;
+}
+.spec {
+  padding: 12rpx 32rpx;
+  border: 1rpx solid var(--line);
+  background: #fff;
+  border-radius: 14rpx;
+  font-size: 25rpx;
+  color: var(--muted);
+}
+.spec.on {
+  border-color: var(--green);
+  background: #eef4ed;
+  color: var(--green);
+  font-weight: 700;
+}
+.frow {
+  display: flex;
+  flex-direction: column;
+  padding: 16rpx 0;
+  border-bottom: 1rpx dashed var(--line);
+}
+.frow:last-child {
+  border-bottom: none;
+}
+.f-label {
+  font-weight: 700;
+  font-size: 27rpx;
+}
+.f-desc {
+  color: var(--muted);
+  font-size: 22rpx;
+  margin-top: 4rpx;
+}
+.desc-line {
+  font-size: 25rpx;
+  color: #4a544e;
+  line-height: 1.9;
+}
+
+/* 图文详情 */
+.sec {
+  margin-bottom: 26rpx;
+}
+.sec:last-child {
+  margin-bottom: 0;
+}
+.sec-visual {
+  height: 240rpx;
+  border-radius: 24rpx;
+  display: grid;
+  place-items: center;
+  background: #ece8d8;
+}
+.sec-visual.green {
+  background: #d9e4d8;
+}
+.sec-visual.orange {
+  background: #f3d8c9;
+}
+.sec-emoji {
+  font-size: 120rpx;
+  line-height: 1;
+}
+.sec-title {
+  font-size: 29rpx;
+  font-weight: 800;
+  margin-top: 16rpx;
+}
+.sec-text {
+  font-size: 25rpx;
+  color: #4a544e;
+  line-height: 1.8;
+  margin-top: 6rpx;
+}
+.footer-bar .cart-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--muted);
+  font-size: 20rpx;
+  width: 96rpx;
+}
+/* 购物车图标：纯 CSS 绘制（袋形），避免 emoji 在不同环境下的渲染差异 */
+.footer-bar .c-icon {
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.footer-bar .c-icon .handle {
+  width: 16rpx;
+  height: 9rpx;
+  border: 4rpx solid currentColor;
+  border-bottom: none;
+  border-radius: 8rpx 8rpx 0 0;
+  box-sizing: border-box;
+}
+.footer-bar .c-icon .body {
+  margin-top: 2rpx;
+  width: 30rpx;
+  height: 22rpx;
+  border: 4rpx solid currentColor;
+  border-radius: 7rpx;
+  box-sizing: border-box;
+}
+.footer-bar .cta {
+  width: 30%;
+}

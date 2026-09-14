@@ -1,0 +1,73 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <view wx:if="{{!qualified}}" class="warn-card">
+    <view class="w-title">当前资格：{{agentStatusLabel}}</view>
+    <view class="w-desc">发起团购需要先通过「AI 课程 / 集采金额 / 社群资料」三重校验并激活分销资格。</view>
+    <button class="cta small" bindtap="onGoQualify" aria-label="去完成资格校验">去完成资格校验</button>
+  </view>
+
+  <view class="card">
+    <view class="card-title">选择开团商品</view>
+    <view class="p-grid">
+      <view
+        wx:for="{{products}}"
+        wx:key="id"
+        class="p-item {{productId === item.id ? 'on' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="onSelectProduct"
+        aria-label="选择商品 {{item.name}}"
+      >
+        <view class="p-emoji {{item.visual}}"><text class="emoji">{{item.emoji}}</text></view>
+        <view class="p-name ellipsis2">{{item.name}}</view>
+        <view class="p-price">¥{{item.priceText}}</view>
+        <view wx:if="{{productId === item.id}}" class="p-check">✓</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">成团目标件数</view>
+    <view class="chips">
+      <view
+        wx:for="{{targetOptions}}"
+        wx:key="*this"
+        class="chip {{targetCount === item ? 'on' : ''}}"
+        data-value="{{item}}"
+        bindtap="onTarget"
+        aria-label="目标 {{item}} 件"
+      >{{item}} 件</view>
+    </view>
+
+    <view class="card-title mt">开团时长</view>
+    <view class="chips">
+      <view
+        wx:for="{{durationOptions}}"
+        wx:key="hours"
+        class="chip {{durationHours === item.hours ? 'on' : ''}}"
+        data-hours="{{item.hours}}"
+        bindtap="onDuration"
+        aria-label="时长 {{item.label}}"
+      >{{item.label}}</view>
+    </view>
+
+    <view class="card-title mt">开团备注</view>
+    <input class="note" value="{{note}}" placeholder="选填：产地、发货时效等说明" bindinput="onNote" aria-label="开团备注" />
+  </view>
+
+  <view class="card">
+    <view class="card-title">开团说明</view>
+    <view class="rule">· 开团后生成团购页，可转发社群邀请参团；</view>
+    <view class="rule">· 截团时间到达后：达到目标件数即「已成团」，未达成则「未成团」并自动退款；</view>
+    <view class="rule">· 本人开团成交按团购直推试算计佣；</view>
+    <view class="rule">· 退款订单不计流水与佣金。</view>
+  </view>
+
+  <view class="disclaimer">佣金试算不构成收益承诺；开团人须为已激活分销员。</view>
+
+  <view class="footer-bar">
+    <view class="total">目标 {{targetCount}} 件 · {{durationHours}} 小时</view>
+    <button class="cta {{qualified ? '' : 'disabled'}}" bindtap="onSubmit" aria-label="确认开团">
+      {{submitting ? '创建中…' : '确认开团'}}
+    </button>
+  </view>
+</view>

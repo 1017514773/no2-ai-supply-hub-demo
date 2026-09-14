@@ -1,0 +1,88 @@
+.page {
+  padding: 20rpx 28rpx 80rpx;
+}
+
+.head-title {
+  font-size: 36rpx;
+  font-weight: 900;
+}
+.head-sub {
+  font-size: 25rpx;
+  color: var(--green);
+  font-weight: 700;
+  margin: 6rpx 0 12rpx;
+}
+
+/* tabs 胶囊 */
+.tabs {
+  white-space: nowrap;
+  margin-bottom: 22rpx;
+}
+.tab {
+  display: inline-block;
+  padding: 12rpx 30rpx;
+  margin-right: 16rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid var(--line);
+  background: var(--card);
+  font-size: 25rpx;
+  color: var(--muted);
+}
+.tab.on {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+  font-weight: 700;
+}
+
+/* 流水条目 */
+.lg {
+  padding: 20rpx 0;
+  border-bottom: 1rpx dashed var(--line);
+}
+.lg:last-of-type {
+  border-bottom: none;
+}
+.lg-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+.lg-left {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  min-width: 0;
+}
+.lg-name {
+  font-size: 27rpx;
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.lg-qty {
+  font-size: 30rpx;
+  font-weight: 900;
+}
+.lg-qty.pos {
+  color: var(--green);
+}
+.lg-qty.neg {
+  color: var(--orange);
+}
+.lg-meta {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-top: 8rpx;
+}
+.lg-note {
+  font-size: 23rpx;
+  color: #4a4a44;
+  background: #f4f0e4;
+  border-radius: 12rpx;
+  padding: 12rpx 16rpx;
+  margin-top: 10rpx;
+  line-height: 1.55;
+}

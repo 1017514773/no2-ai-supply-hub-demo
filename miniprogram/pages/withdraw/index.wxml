@@ -1,0 +1,64 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <view wx:if="{{!qualified && !loading}}" class="block-card">
+    <view class="b-title">⚠ 暂不可提现（资格未激活）</view>
+    <view class="b-status">当前资格：{{statusLabel}}</view>
+    <view class="b-item" wx:for="{{missing}}" wx:key="*this">· {{item}}</view>
+    <button class="cta small" bindtap="onGoQualify" aria-label="去完成资格校验">去完成资格校验</button>
+  </view>
+
+  <view class="card" wx:if="{{totals}}">
+    <view class="wd-num-label">可提现金额（元）</view>
+    <view class="wd-num">¥{{withdrawableText}}</view>
+    <view class="muted">可结算 ¥{{fmt.yuan(totals.readyFen)}} － 提现在途 ¥{{fmt.yuan(totals.pendingWithdrawFen)}}；最低提现 ¥{{minYuan}}。</view>
+
+    <view class="field">
+      <text class="f-label">提现金额</text>
+      <input
+        class="f-input"
+        type="digit"
+        value="{{amountYuan}}"
+        disabled="{{!qualified}}"
+        placeholder="输入金额（元）"
+        bindinput="onAmount"
+        aria-label="提现金额"
+      />
+      <text class="all" bindtap="onAll" aria-label="全部提现">全部</text>
+    </view>
+    <view class="field">
+      <text class="f-label">到账账户</text>
+      <text class="f-static">{{account}}</text>
+    </view>
+
+    <button
+      class="cta {{qualified ? '' : 'disabled'}} mt18"
+      bindtap="onSubmit"
+      aria-label="提交提现申请"
+    >
+      {{qualified ? (submitting ? '提交中…' : '提交提现申请') : '资格未激活，暂不可提现'}}
+    </button>
+    <view class="muted">提交后进入「待审核」，可在下方记录中登记打款回执。</view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">提现记录</view>
+    <view class="rec" wx:for="{{records}}" wx:key="id">
+      <view class="rec-head">
+        <text class="rec-amount">¥{{item.amountText}}</text>
+        <text class="pill {{item.pill}}">{{item.statusLabel}}</text>
+      </view>
+      <view class="rec-meta">申请时间：{{item.createdText}} · 账户：{{item.account}}</view>
+      <view class="rec-meta" wx:if="{{item.paidText}}">打款时间：{{item.paidText}} · 回执：{{item.receiptNo}}</view>
+      <button
+        wx:if="{{item.canPayback}}"
+        class="cta small ghost mt14"
+        data-id="{{item.id}}"
+        bindtap="onPayback"
+        aria-label="财务打款回写"
+      >财务打款回写</button>
+    </view>
+    <view wx:if="{{!records.length && !loading}}" class="muted">暂无提现记录</view>
+  </view>
+
+  <view class="disclaimer">金额仅供参考，不构成收益承诺。</view>
+</view>

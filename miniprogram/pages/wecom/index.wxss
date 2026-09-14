@@ -1,0 +1,193 @@
+.page {
+  padding: 20rpx 28rpx 80rpx;
+}
+
+.head-title {
+  font-size: 36rpx;
+  font-weight: 900;
+}
+.head-sub {
+  font-size: 25rpx;
+  color: var(--green);
+  font-weight: 700;
+  margin: 6rpx 0 12rpx;
+}
+
+/* tabs 胶囊 */
+.tabs {
+  white-space: nowrap;
+  margin-bottom: 22rpx;
+}
+.tab {
+  display: inline-block;
+  padding: 12rpx 30rpx;
+  margin-right: 16rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid var(--line);
+  background: var(--card);
+  font-size: 25rpx;
+  color: var(--muted);
+}
+.tab.on {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+  font-weight: 700;
+}
+
+/* 会话列表 */
+.cv {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  padding: 22rpx 0;
+  border-bottom: 1rpx dashed var(--line);
+}
+.cv:last-of-type {
+  border-bottom: none;
+}
+.cv-ava {
+  width: 82rpx;
+  height: 82rpx;
+  border-radius: 50%;
+  background: #eef0e2;
+  display: grid;
+  place-items: center;
+  font-size: 40rpx;
+  flex-shrink: 0;
+}
+.cv-main {
+  flex: 1;
+  min-width: 0;
+}
+.cv-top {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+.cv-name {
+  font-size: 28rpx;
+  font-weight: 800;
+}
+.cv-last {
+  font-size: 24rpx;
+  color: #4a4a44;
+  margin-top: 6rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.cv-meta {
+  font-size: 21rpx;
+  color: var(--muted);
+  margin-top: 4rpx;
+}
+
+/* 会话详情 */
+.link {
+  color: var(--green);
+  font-weight: 700;
+  font-size: 24rpx;
+}
+.msg {
+  margin: 18rpx 0;
+}
+.bubble {
+  display: inline-block;
+  max-width: 82%;
+  background: #f4f0e4;
+  border-radius: 18rpx;
+  padding: 16rpx 20rpx;
+  font-size: 25rpx;
+  line-height: 1.6;
+}
+.msg.mine {
+  text-align: right;
+}
+.msg.mine .bubble {
+  background: var(--green);
+  color: #fff;
+  text-align: left;
+}
+.msg-time {
+  font-size: 20rpx;
+  color: var(--muted);
+  margin-top: 6rpx;
+}
+.msg.mine .msg-time {
+  text-align: right;
+}
+
+/* AI 草稿 */
+.draft {
+  border: 2rpx dashed var(--green);
+  border-radius: 18rpx;
+  padding: 18rpx 20rpx;
+  margin-top: 16rpx;
+  background: #f3f8f0;
+}
+.draft-tag {
+  font-size: 21rpx;
+  color: var(--green);
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+.draft-text {
+  font-size: 24rpx;
+  line-height: 1.65;
+}
+
+/* 回复输入 */
+.reply {
+  width: 100%;
+  min-height: 140rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 18rpx;
+  padding: 20rpx;
+  font-size: 25rpx;
+  background: #fff;
+  box-sizing: border-box;
+}
+.mt18 {
+  margin-top: 18rpx;
+}
+
+/* 社群管理 */
+.gp {
+  border: 1rpx solid var(--line);
+  border-radius: 20rpx;
+  padding: 22rpx;
+  margin-bottom: 18rpx;
+  background: #fbf8ef;
+}
+.gp-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+.gp-name {
+  font-size: 28rpx;
+  font-weight: 800;
+}
+.gp-meta {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-top: 8rpx;
+  line-height: 1.6;
+}
+.gp-last {
+  font-size: 22rpx;
+  color: #4a4a44;
+  background: #f4f0e4;
+  border-radius: 12rpx;
+  padding: 12rpx 16rpx;
+  margin-top: 10rpx;
+  line-height: 1.55;
+}
+.gp-actions {
+  display: flex;
+  gap: 14rpx;
+  margin-top: 14rpx;
+  flex-wrap: wrap;
+}

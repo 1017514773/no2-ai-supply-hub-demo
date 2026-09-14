@@ -1,0 +1,97 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <view wx:if="{{isGroup}}" class="group-banner">
+    🔥 团购订单：支付成功后将自动计入手集团购数量
+  </view>
+
+  <view class="card">
+    <view class="card-title">履约方式</view>
+    <view
+      wx:for="{{fulfillments}}"
+      wx:key="key"
+      class="opt {{fulfillment === item.key ? 'on' : ''}}"
+      data-key="{{item.key}}"
+      bindtap="onFulfillment"
+      aria-label="选择履约方式 {{item.label}}"
+    >
+      <view class="opt-radio">{{fulfillment === item.key ? '●' : '○'}}</view>
+      <view class="opt-body">
+        <view class="opt-label">{{item.label}}</view>
+        <view class="opt-desc">{{item.desc}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{fulfillment === 'DELIVERY'}}">
+    <view class="card-title">收货地址</view>
+    <view class="addr" bindtap="onGoAddress" aria-label="选择收货地址">
+      <block wx:if="{{address}}">
+        <view class="addr-name">{{address.name}}　{{address.phone}}</view>
+        <view class="addr-detail">{{address.region}} {{address.detail}}</view>
+      </block>
+      <view wx:else class="addr-empty">＋ 添加收货地址</view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{fulfillment === 'PICKUP' && pickupPoint}}">
+    <view class="card-title">自提点信息</view>
+    <view class="row"><text class="label">自提点</text><text>{{pickupPoint.name}}</text></view>
+    <view class="row"><text class="label">地址</text><text>{{pickupPoint.address}}</text></view>
+    <view class="row"><text class="label">营业时间</text><text>{{pickupPoint.hours}}</text></view>
+    <view class="muted">支付后仓库备货，核销码将在订单详情展示，凭码提货。</view>
+  </view>
+
+  <view class="card" wx:if="{{fulfillment === 'CONSIGN'}}">
+    <view class="card-title">仓内寄存说明</view>
+    <view class="muted">下单支付后生成寄存批次（批次号 / 有效期 / 责任人可追溯），可在「我的-仓内寄存」查看，按需申请发货。</view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">商品清单（{{items.length}} 项）</view>
+    <view class="item" wx:for="{{items}}" wx:key="productId">
+      <view class="v emoji">{{item.emoji}}</view>
+      <view class="i-body">
+        <view class="i-name">{{item.name}}</view>
+        <view class="i-spec">{{item.spec}}</view>
+      </view>
+      <view class="i-right">
+        <view class="i-price">¥{{fmt.yuan(item.priceFen)}}</view>
+        <view class="i-qty">x{{item.qty}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{amounts}}">
+    <view class="row"><text class="label">商品金额</text><text>¥{{fmt.yuan(amounts.productAmountFen)}}</text></view>
+    <view class="row">
+      <text class="label">运费</text>
+      <text>
+        {{amounts.freightFen ? '¥' + fmt.yuan(amounts.freightFen) : '免运费'}}
+      </text>
+    </view>
+    <view class="row">
+      <text class="label">应付合计</text>
+      <text class="price-num">¥{{fmt.yuan(amounts.payableFen)}}</text>
+    </view>
+    <view class="muted">代发满 ¥{{freeFreightYuan}} 免运费；自提 / 寄存不产生运费。</view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">订单备注</view>
+    <input class="remark" placeholder="选填：给仓库的备注" value="{{remark}}" bindinput="onRemark" aria-label="订单备注" />
+  </view>
+
+  <view class="disclaimer">金额、佣金以实际结算为准，不构成收益承诺。</view>
+
+  <view class="footer-bar">
+    <view class="total">
+      应付
+      <text class="price-num">{{amounts ? '¥' + fmt.yuan(amounts.payableFen) : '--'}}</text>
+    </view>
+    <button class="cta {{submitting ? 'disabled' : ''}}" bindtap="onSubmit" aria-label="提交订单">
+      {{submitting ? '提交中…' : '提交订单'}}
+    </button>
+  </view>
+
+  <pay-sheet show="{{showPay}}" order="{{createdOrder}}" bind:success="onPaySuccess" bind:close="onPayClose" />
+</view>

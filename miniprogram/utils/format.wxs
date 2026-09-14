@@ -1,0 +1,49 @@
+/* WXML 内联格式化（WXS，ES5 语法） */
+function pad2(n) {
+  return n < 10 ? '0' + n : '' + n;
+}
+
+function yuan(fen) {
+  // WXS 禁止调用 Number() 等内置构造器，用算术运算数值化；NaN 按 0 处理
+  var v = fen - 0;
+  if (v !== v) {
+    v = 0;
+  }
+  var neg = v < 0;
+  var abs = neg ? -v : v;
+  var y = Math.floor(abs / 100);
+  var c = abs % 100;
+  var s;
+  if (c === 0) {
+    s = '' + y;
+  } else if (c % 10 === 0) {
+    s = y + '.' + c / 10;
+  } else {
+    s = y + '.' + pad2(c);
+  }
+  return neg ? '-' + s : s;
+}
+
+function money(fen) {
+  return '¥' + yuan(fen);
+}
+
+/** 分 → 万元展示（保留 1 位小数，如 86123400 → '86.1万'） */
+function wan(fen) {
+  var v = (fen - 0) / 1000000;
+  if (v !== v) {
+    v = 0;
+  }
+  var r = Math.round(v * 10) / 10;
+  var s = '' + r;
+  if (s.indexOf('.') < 0) {
+    s = s + '.0';
+  }
+  return s + '万';
+}
+
+module.exports = {
+  yuan: yuan,
+  money: money,
+  wan: wan
+};

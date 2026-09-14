@@ -1,0 +1,168 @@
+/* 自定义底部导航：纯 CSS 绘制的线性图标，保证工具/真机渲染一致 */
+.tabbar {
+  position: fixed;
+  z-index: 60;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  height: 112rpx;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+  background: #fffdf7;
+  border-top: 1rpx solid #dcd6c7;
+  box-shadow: 0 -8rpx 24rpx rgba(24, 52, 43, 0.06);
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #7b817d;
+  transition: color 0.2s ease;
+}
+
+.tab.active {
+  color: #155c45;
+}
+
+.tab .label {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  line-height: 1;
+}
+
+.tab.active .label {
+  font-weight: 600;
+}
+
+/* ===== 图标画布（44rpx，五个图标统一用流式布局绘制，不用绝对定位） ===== */
+.ico {
+  position: relative;
+  flex: none;
+  width: 44rpx;
+  height: 44rpx;
+}
+
+/* 首页：屋顶 + 房身 */
+.ico-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ico-home .roof {
+  width: 18rpx;
+  height: 18rpx;
+  border-top: 4rpx solid;
+  border-left: 4rpx solid;
+  border-radius: 4rpx 0 0 0;
+  transform: rotate(45deg);
+  box-sizing: border-box;
+}
+.ico-home .body {
+  margin-top: -4rpx; /* 房身盖住屋顶菱形探入的下半部 */
+  width: 30rpx;
+  height: 21rpx;
+  border: 4rpx solid;
+  border-top: none;
+  border-radius: 0 0 6rpx 6rpx;
+  background: #fffdf7;
+  box-sizing: border-box;
+}
+
+/* 团购：购物袋（把手与袋身留缝，避免小尺寸下糊成实心块） */
+.ico-bag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ico-bag .handle {
+  width: 16rpx;
+  height: 9rpx;
+  border: 4rpx solid;
+  border-bottom: none;
+  border-radius: 8rpx 8rpx 0 0;
+  box-sizing: border-box;
+}
+.ico-bag .body {
+  margin-top: 2rpx;
+  width: 30rpx;
+  height: 25rpx;
+  border: 4rpx solid;
+  border-radius: 8rpx;
+  box-sizing: border-box;
+}
+
+/* 经营台：柱状图 */
+.ico-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.ico-bars .b {
+  width: 8rpx;
+  margin: 0 2rpx 7rpx;
+  border-radius: 3rpx;
+  background: currentColor;
+  box-sizing: border-box;
+}
+.ico-bars .b1 {
+  height: 13rpx;
+}
+.ico-bars .b2 {
+  height: 23rpx;
+}
+.ico-bars .b3 {
+  height: 33rpx;
+}
+
+/* 收益：硬币 */
+.ico-coin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ico-coin .ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36rpx;
+  height: 36rpx;
+  border: 4rpx solid;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+.ico-coin .c {
+  font-size: 22rpx;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(-1rpx);
+}
+
+/* 我的：人像 */
+.ico-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ico-user .head {
+  width: 18rpx;
+  height: 18rpx;
+  border: 4rpx solid;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+.ico-user .body {
+  width: 32rpx;
+  height: 16rpx;
+  margin-top: 2rpx;
+  border: 4rpx solid;
+  border-bottom: none;
+  border-radius: 16rpx 16rpx 0 0;
+  box-sizing: border-box;
+}

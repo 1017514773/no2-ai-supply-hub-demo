@@ -1,0 +1,139 @@
+<view class="page">
+  <view class="card head">
+    <view class="head-title">AI 工作台</view>
+    <view class="head-sub">营销文案 · 海报文案</view>
+    <view class="muted">文案按商品与团购数据即时生成，作为发布草稿；价格、库存与活动口径需人工确认后使用。</view>
+  </view>
+
+  <view class="tabs">
+    <view
+      class="tab {{tab === item.key ? 'on' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="key"
+      data-key="{{item.key}}"
+      bindtap="onTab"
+    >
+      {{item.label}}
+    </view>
+  </view>
+
+  <block wx:if="{{tab === 'copy'}}">
+    <view class="card">
+      <view class="card-title">选择商品<text class="muted">选品即用</text></view>
+      <view class="chips">
+        <view
+          class="chip {{productId === item.id ? 'on' : ''}}"
+          wx:for="{{products}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="onPickProduct"
+          aria-label="选择商品 {{item.name}}"
+        >
+          {{item.emoji}} {{item.name}}
+        </view>
+      </view>
+      <view wx:if="{{!loading && !products.length}}" class="muted">暂无可选商品</view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">文案风格</view>
+      <view class="chips">
+        <view
+          class="chip {{styleKey === item.key ? 'on' : ''}}"
+          wx:for="{{styles}}"
+          wx:key="key"
+          data-key="{{item.key}}"
+          bindtap="onPickStyle"
+        >
+          {{item.label}}
+        </view>
+      </view>
+      <button
+        class="cta mt18 {{productId && !generating ? '' : 'disabled'}}"
+        bindtap="onGenerate"
+        aria-label="生成文案草稿"
+      >
+        {{generating ? '生成中…' : '生成 3 版文案草稿'}}
+      </button>
+    </view>
+
+    <view class="card" wx:if="{{result}}">
+      <view class="card-title">
+        <text>生成结果</text>
+        <text class="muted">{{result.productName}} · {{result.styleLabel}}</text>
+      </view>
+      <view class="ver {{adoptedIdx === index ? 'adopted' : ''}}" wx:for="{{versions}}" wx:key="id">
+        <view class="ver-top">
+          <text class="pill">{{item.scene}}</text>
+          <text class="ver-adopted" wx:if="{{adoptedIdx === index}}">已采用</text>
+        </view>
+        <view class="ver-text">{{item.text}}</view>
+        <view class="ver-actions">
+          <button class="cta small ghost" data-idx="{{index}}" bindtap="onCopyVersion">复制</button>
+          <button
+            class="cta small {{adoptedIdx === index ? 'alt' : 'ghost'}}"
+            data-idx="{{index}}"
+            bindtap="onAdopt"
+          >
+            {{adoptedIdx === index ? '已采用' : '采用'}}
+          </button>
+        </view>
+      </view>
+      <view class="muted mt10">生成时间 {{result.generatedAt}} · 采用后可复制到企微群或朋友圈</view>
+    </view>
+
+    <view class="disclaimer" wx:if="{{result}}">生成内容为发布草稿：价格与活动口径随商品数据实时变化，对外发布前需人工确认。</view>
+  </block>
+
+  <block wx:else>
+    <view class="card">
+      <view class="card-title">选择团购<text class="muted">按实时进度生成</text></view>
+      <view class="chips">
+        <view
+          class="chip {{groupId === item.id ? 'on' : ''}}"
+          wx:for="{{groups}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="onPickGroup"
+          aria-label="选择团购 {{item.title}}"
+        >
+          {{item.title}}（{{item.joinedText}}）
+        </view>
+      </view>
+      <view wx:if="{{!loading && !groups.length}}" class="muted">暂无团购，可先去「经营台」发起一场</view>
+      <button
+        class="cta mt18 {{groupId && !posterLoading ? '' : 'disabled'}}"
+        bindtap="onGeneratePoster"
+        aria-label="生成海报文案"
+      >
+        {{posterLoading ? '生成中…' : '生成海报文案'}}
+      </button>
+    </view>
+
+    <block wx:if="{{poster}}">
+      <view class="card">
+        <view class="card-title">
+          <text>海报文案</text>
+          <text class="pill ok">{{poster.group.statusLabel}}</text>
+        </view>
+        <view class="pk">
+          <view class="pk-title">{{poster.pack.title}}</view>
+          <view class="pk-sub">{{poster.pack.subtitle}}</view>
+          <view class="pk-point" wx:for="{{poster.pack.points}}" wx:key="*this">· {{item}}</view>
+          <view class="pk-cta">{{poster.pack.cta}}</view>
+        </view>
+
+        <view class="card-title mt20">备选标题</view>
+        <view class="pk-alt" wx:for="{{poster.alternates}}" wx:key="*this">{{item}}</view>
+
+        <view class="muted mt14">{{poster.note}}</view>
+        <view class="acts">
+          <button class="cta ghost" bindtap="onCopyPoster" aria-label="复制海报文案全文">复制全文</button>
+          <button class="cta alt" bindtap="onGoPoster" aria-label="去制作海报">去制作海报</button>
+        </view>
+      </view>
+
+      <view class="disclaimer">文案随团购进度实时更新；「去制作海报」将打开该团购详情，在「分享海报」中生成分享图。</view>
+    </block>
+  </block>
+</view>

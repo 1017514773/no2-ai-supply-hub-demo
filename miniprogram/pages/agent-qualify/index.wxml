@@ -1,0 +1,100 @@
+<view class="page">
+  <block wx:if="{{view}}">
+    <view class="card status-card">
+      <view class="s-top">
+        <text class="pill {{view.pill}}">{{view.statusLabel}}</text>
+        <text class="muted">推广编号 {{view.agentNo}}</text>
+      </view>
+      <view class="s-title">三重资格校验（{{view.passedCount}}/3 通过）</view>
+      <view class="muted" wx:if="{{view.activatedText}}">激活时间：{{view.activatedText}}（记录操作人与原因）</view>
+      <view class="muted" wx:else>完成以下三项并审核通过后，自动激活分销资格。</view>
+      <view class="frozen-tip" wx:if="{{view.status === 'FROZEN'}}">资格已冻结：冻结期间不可发起团购与申请提现，历史收益与流水不受影响；需人工复核后恢复。</view>
+      <view class="frozen-tip" wx:if="{{view.status === 'CANCELLED'}}">资格已注销：重新完成三重校验后可再次激活，历史佣金流水与审计记录完整保留。</view>
+    </view>
+
+    <!-- 1 课程 -->
+    <view class="card">
+      <view class="card-title">
+        1 · AI 课程凭证
+        <text class="pill {{course.state === 'PASSED' ? 'ok' : course.state === 'PENDING' ? 'warn' : 'gray'}}">{{course.stateLabel}}</text>
+      </view>
+      <view class="item-line" wx:if="{{course.fileName}}">📎 {{course.fileName}}</view>
+      <view class="item-line muted" wx:if="{{course.submittedText}}">提交时间：{{course.submittedText}}</view>
+      <view class="item-line muted" wx:if="{{course.reviewedText}}">审核：{{course.operator}} · {{course.reviewedText}}</view>
+      <view class="muted">说明：完成指定 AI 课程学习，上传报名/结课凭证后提交审核。</view>
+      <button wx:if="{{course.canSubmit}}" class="cta small ghost mt" bindtap="onUploadCourse" aria-label="上传课程凭证">上传课程凭证</button>
+    </view>
+
+    <!-- 2 集采 -->
+    <view class="card">
+      <view class="card-title">
+        2 · 集采金额达标
+        <text class="pill {{purchase.passed ? 'ok' : 'warn'}}">{{purchase.passed ? '已达标' : '未达标'}}</text>
+      </view>
+      <view class="progress"><view class="bar" style="width: {{purchase.pct}}%"></view></view>
+      <view class="p-line">
+        <text>已集采 <text class="strong">¥{{purchase.amountText}}</text> / 门槛 ¥{{purchase.thresholdText}}</text>
+        <text class="muted">共 {{purchase.orderCount}} 单</text>
+      </view>
+      <view class="muted">说明：按已支付且计入业绩的订单实时累计，退款订单自动剔除（基线为历史线下结转）。</view>
+    </view>
+
+    <!-- 3 社群 -->
+    <view class="card">
+      <view class="card-title">
+        3 · 社群资料
+        <text class="pill {{community.state === 'PASSED' ? 'ok' : community.state === 'PENDING' ? 'warn' : 'gray'}}">{{community.stateLabel}}</text>
+      </view>
+      <view class="item-line" wx:if="{{community.name}}">社群：{{community.name}}（{{community.memberCount}} 人）</view>
+      <view class="item-line" wx:if="{{community.fileName}}">📎 {{community.fileName}}</view>
+      <view class="item-line muted" wx:if="{{community.submittedText}}">提交时间：{{community.submittedText}}</view>
+      <view class="item-line muted" wx:if="{{community.reviewedText}}">审核：{{community.operator}} · {{community.reviewedText}}</view>
+
+      <block wx:if="{{community.canSubmit}}">
+        <view class="field">
+          <text class="f-label">社群名称</text>
+          <input class="f-input" value="{{communityName}}" placeholder="如：金轮椅上海交流 2 群" bindinput="onCommunityName" aria-label="社群名称" />
+        </view>
+        <view class="field">
+          <text class="f-label">成员数</text>
+          <input class="f-input" type="number" value="{{memberCount}}" placeholder="如：200" bindinput="onMemberCount" aria-label="社群成员数" />
+        </view>
+        <button class="cta small ghost mt" bindtap="onSubmitCommunity" aria-label="提交社群资料">提交社群资料（含管理员证明）</button>
+      </block>
+    </view>
+
+    <view class="card">
+      <view class="card-title">审核操作</view>
+      <view class="ops-panel">
+        <view class="t">审核通过后自动激活并写入审计日志；重置资格可重新走完整校验流程</view>
+        <view class="ops">
+          <button class="cta small" bindtap="onReview" aria-label="客服审核通过">审核通过</button>
+          <button class="cta small ghost" bindtap="onReset" aria-label="重置资格流程">重置资格流程</button>
+        </view>
+      </view>
+      <view class="ops-panel">
+        <view class="t">运营流转：冻结 / 恢复 / 注销均记录操作人与原因，可在审计日志追溯</view>
+        <view class="ops">
+          <button wx:if="{{view.canFreeze}}" class="cta small ghost" bindtap="onFreezeQual" aria-label="冻结资格">冻结资格</button>
+          <button wx:if="{{view.canReactivate}}" class="cta small" bindtap="onReactivateQual" aria-label="恢复资格">恢复激活</button>
+          <button wx:if="{{view.canCancel}}" class="cta small ghost" bindtap="onCancelQual" aria-label="注销资格">注销资格</button>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">审计日志（近 10 条）</view>
+      <view class="log" wx:for="{{logs}}" wx:key="id">
+        <view class="log-head">
+          <text class="log-action">{{item.action}}</text>
+          <text class="muted">{{item.atText}}</text>
+        </view>
+        <view class="log-detail">{{item.detail}}</view>
+        <view class="muted">操作人：{{item.operator}}</view>
+      </view>
+      <view wx:if="{{!logs.length}}" class="muted">暂无日志</view>
+    </view>
+
+    <view class="disclaimer">资格规则以正式协议与书面确认为准。</view>
+  </block>
+</view>

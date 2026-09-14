@@ -1,0 +1,49 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <view class="card hero" wx:if="{{totals}}">
+    <view class="hero-label">可提现金额（元）</view>
+    <view class="hero-num">¥{{fmt.yuan(totals.withdrawableFen)}}</view>
+    <view class="hero-sub">可结算 ¥{{fmt.yuan(totals.readyFen)}} － 提现在途 ¥{{fmt.yuan(totals.pendingWithdrawFen)}}</view>
+    <button class="cta alt" bindtap="onWithdraw" aria-label="申请提现">申请提现</button>
+  </view>
+
+  <view class="card" wx:if="{{totals}}">
+    <view class="card-title">口径总览</view>
+    <view class="grid2">
+      <view class="cell"><view class="cell-num">¥{{fmt.yuan(totals.estimatedFen)}}</view><view class="cell-label">预计佣金（未完成）</view></view>
+      <view class="cell"><view class="cell-num">¥{{fmt.yuan(totals.frozenFen)}}</view><view class="cell-label">冻结中</view></view>
+      <view class="cell"><view class="cell-num ok">¥{{fmt.yuan(totals.readyFen)}}</view><view class="cell-label">可结算</view></view>
+      <view class="cell"><view class="cell-num">¥{{fmt.yuan(totals.settledFen)}}</view><view class="cell-label">已结算</view></view>
+    </view>
+    <view class="muted">退款冲销累计 ¥{{fmt.yuan(totals.reversedFen)}}（保留历史流水，生成负向冲销记录）。</view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">近 7 日收益（元）</view>
+    <view class="chart">
+      <view class="bar-item" wx:for="{{bars}}" wx:key="label">
+        <view class="bar-num">{{item.text}}</view>
+        <view class="bar-track"><view class="bar-fill" style="height: {{item.pct}}%"></view></view>
+        <view class="bar-label">{{item.label}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">
+      最近佣金流水
+      <text class="link" bindtap="onLedger">全部流水 ›</text>
+    </view>
+    <view class="cm" wx:for="{{recent}}" wx:key="id" bindtap="onDetail">
+      <view class="cm-head">
+        <text class="cm-type">{{item.typeLabel}} · {{item.customerName || '本人'}}</text>
+        <text class="cm-amount {{item.negative ? 'neg' : ''}}">{{item.amountText}}</text>
+      </view>
+      <view class="cm-meta">{{item.statusLabel}} · {{item.timeText}}<block wx:if="{{item.orderNo}}"> · 订单 {{item.orderNo}}</block></view>
+      <view class="cm-explain">{{item.explain}}</view>
+    </view>
+    <view wx:if="{{!recent.length && !loading}}" class="muted">暂无流水</view>
+  </view>
+
+  <view class="disclaimer">{{disclaimer}}</view>
+</view>

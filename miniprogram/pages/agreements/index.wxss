@@ -1,0 +1,44 @@
+.page {
+  padding: 20rpx 28rpx 80rpx;
+}
+
+.doc {
+  padding: 26rpx;
+}
+.doc-head {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.doc-info {
+  flex: 1;
+}
+.doc-title {
+  font-size: 29rpx;
+  font-weight: 800;
+}
+.doc-summary {
+  font-size: 23rpx;
+  color: var(--muted);
+  margin-top: 8rpx;
+  line-height: 1.5;
+}
+.doc-arrow {
+  color: var(--muted);
+  font-size: 40rpx;
+  transition: transform 0.2s ease;
+}
+.doc-arrow.open {
+  transform: rotate(90deg);
+  color: var(--green);
+}
+.doc-body {
+  margin-top: 20rpx;
+  padding: 22rpx;
+  border-radius: 16rpx;
+  background: #f4f0e4;
+  font-size: 24rpx;
+  line-height: 1.8;
+  color: #4a4a44;
+  white-space: pre-wrap;
+}

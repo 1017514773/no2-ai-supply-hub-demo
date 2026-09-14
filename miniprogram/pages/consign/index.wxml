@@ -1,0 +1,51 @@
+<view class="page">
+  <view class="card summary">
+    <view class="s-row">
+      <view class="s-item">
+        <view class="s-num">{{totalRemain}}</view>
+        <view class="s-label">在库总件数</view>
+      </view>
+      <view class="s-item">
+        <view class="s-num">{{lotCount}}</view>
+        <view class="s-label">寄存批次</view>
+      </view>
+    </view>
+    <view class="s-warehouse">🏬 {{warehouse}}</view>
+    <view class="muted" bindtap="onResetHint">寄存规则说明（点此查看）</view>
+    <button class="cta small stock-link" bindtap="onStockLedger" aria-label="查看库存流水">查看库存流水</button>
+  </view>
+
+  <view class="card lot" wx:for="{{list}}" wx:key="lotNo">
+    <view class="l-head">
+      <text class="l-emoji">{{item.emoji}}</text>
+      <view class="l-info">
+        <view class="l-name">{{item.name}}</view>
+        <view class="l-spec">{{item.spec}}</view>
+      </view>
+      <text class="pill">{{item.statusLabel}}</text>
+    </view>
+    <view class="row"><text class="label">批次号</text><text>{{item.lotNo}}</text></view>
+    <view class="row"><text class="label">库存 / 剩余</text><text>{{item.qty}} 件 / <text class="ok-text">{{item.remain}} 件</text></text></view>
+    <view class="row">
+      <text class="label">有效期至</text>
+      <text>
+        {{item.expireText}}
+        <text class="{{item.expiring ? 'warn-text' : 'ok-text'}}">（剩 {{item.remainDays}} 天）</text>
+      </text>
+    </view>
+    <view class="row"><text class="label">入库时间</text><text>{{item.createdText}}</text></view>
+    <view class="row"><text class="label">责任人</text><text>{{item.ownerName}}</text></view>
+
+    <button class="cta small ghost apply-btn" data-lot="{{item.lotNo}}" bindtap="onShipApply" aria-label="申请发货 {{item.lotNo}}">
+      申请发货
+    </button>
+  </view>
+
+  <view wx:if="{{!loading && !list.length}}" class="empty">
+    <text class="icon">🏬</text>
+    暂无寄存批次
+    <view class="muted">下单时选择「仓内寄存」，支付后自动生成批次记录。</view>
+  </view>
+
+  <view class="disclaimer">批次与有效期以仓储记录为准，不构成货权承诺文件。</view>
+</view>

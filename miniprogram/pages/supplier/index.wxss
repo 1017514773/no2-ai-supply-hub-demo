@@ -1,0 +1,156 @@
+.page {
+  padding: 20rpx 28rpx 80rpx;
+}
+
+.head-title {
+  font-size: 36rpx;
+  font-weight: 900;
+}
+.head-sub {
+  font-size: 25rpx;
+  color: var(--green);
+  font-weight: 700;
+  margin: 6rpx 0 12rpx;
+}
+
+/* 汇总统计 */
+.grid3 .stat {
+  text-align: center;
+  background: #fbf8ef;
+  border: 1rpx solid var(--line);
+  border-radius: 18rpx;
+  padding: 18rpx 8rpx;
+}
+.grid3 .num {
+  font-size: 40rpx;
+  font-weight: 900;
+  color: var(--green);
+}
+.grid3 .num.amt {
+  font-size: 30rpx;
+  line-height: 1.5;
+  word-break: break-all;
+}
+.grid3 .lb {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-top: 4rpx;
+}
+
+/* 伙伴卡片 */
+.pt {
+  border: 1rpx solid var(--line);
+  border-radius: 20rpx;
+  padding: 22rpx;
+  margin-bottom: 18rpx;
+  background: #fbf8ef;
+}
+.pt:last-of-type {
+  margin-bottom: 0;
+}
+.pt.open {
+  border-color: var(--green);
+  background: #f1f6ee;
+}
+.pt-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 18rpx;
+}
+.pt-ava {
+  width: 78rpx;
+  height: 78rpx;
+  border-radius: 50%;
+  background: #eef0e2;
+  display: grid;
+  place-items: center;
+  font-size: 38rpx;
+  flex-shrink: 0;
+}
+.pt-name-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  min-width: 0;
+}
+.pt-name {
+  font-size: 28rpx;
+  font-weight: 800;
+  max-width: 340rpx;
+}
+.pt-meta {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-top: 6rpx;
+  line-height: 1.55;
+}
+.pt-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+.pt-amount {
+  font-size: 27rpx;
+  font-weight: 800;
+  color: var(--orange);
+  margin-top: 8rpx;
+}
+.pt-toggle {
+  font-size: 22rpx;
+  color: var(--green);
+  font-weight: 700;
+  margin-top: 6rpx;
+}
+
+/* 展开区 */
+.sub-title {
+  font-size: 24rpx;
+  font-weight: 800;
+  color: var(--green);
+  margin: 22rpx 0 10rpx;
+}
+.it {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 16rpx 0;
+  border-bottom: 1rpx dashed var(--line);
+}
+.it:last-of-type {
+  border-bottom: none;
+}
+.it-name {
+  font-size: 25rpx;
+  font-weight: 700;
+}
+.it-spec {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-top: 4rpx;
+}
+.it-amount {
+  font-size: 25rpx;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+/* 记录 */
+.rc {
+  padding: 14rpx 0;
+  border-bottom: 1rpx dashed var(--line);
+}
+.rc:last-of-type {
+  border-bottom: none;
+}
+.rc-action {
+  font-size: 24rpx;
+  font-weight: 700;
+}
+.rc-meta {
+  font-size: 21rpx;
+  color: var(--muted);
+  margin-top: 4rpx;
+}
+
+.mt10 {
+  margin-top: 10rpx;
+}

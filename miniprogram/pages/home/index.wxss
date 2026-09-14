@@ -1,0 +1,255 @@
+.page {
+  padding: 20rpx 28rpx 180rpx;
+}
+
+/* 顶部品牌栏 */
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8rpx 4rpx 20rpx;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.mark {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--lime);
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 30rpx;
+  border: 5rpx solid #fff;
+}
+.bname {
+  font-size: 32rpx;
+  font-weight: 800;
+}
+.bsub {
+  color: var(--muted);
+  font-size: 20rpx;
+}
+.cart-entry {
+  position: relative;
+  width: 76rpx;
+  height: 76rpx;
+  border: 1rpx solid var(--line);
+  background: var(--card);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green);
+}
+/* 购物车图标：纯 CSS 绘制（袋形），避免 emoji 在不同环境下的渲染差异 */
+.cart-icon {
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.cart-icon .handle {
+  width: 16rpx;
+  height: 9rpx;
+  border: 4rpx solid currentColor;
+  border-bottom: none;
+  border-radius: 8rpx 8rpx 0 0;
+  box-sizing: border-box;
+}
+.cart-icon .body {
+  margin-top: 2rpx;
+  width: 30rpx;
+  height: 22rpx;
+  border: 4rpx solid currentColor;
+  border-radius: 7rpx;
+  box-sizing: border-box;
+}
+.badge {
+  position: absolute;
+  right: -6rpx;
+  top: -6rpx;
+  min-width: 34rpx;
+  height: 34rpx;
+  padding: 0 8rpx;
+  border-radius: 999rpx;
+  background: var(--orange);
+  color: #fff;
+  font-size: 20rpx;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* 搜索框 */
+.searchbar {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  background: var(--card);
+  border: 1rpx solid var(--line);
+  border-radius: 999rpx;
+  padding: 18rpx 26rpx;
+  color: var(--muted);
+  font-size: 25rpx;
+}
+.s-icon {
+  font-size: 30rpx;
+}
+
+/* Hero */
+.hero {
+  margin-top: 24rpx;
+  background: var(--green);
+  color: #fff;
+  border-radius: 36rpx;
+  padding: 36rpx 32rpx 30rpx;
+  position: relative;
+  overflow: hidden;
+}
+.eyebrow {
+  display: inline-block;
+  background: var(--lime);
+  color: var(--ink);
+  padding: 6rpx 20rpx;
+  border-radius: 999rpx;
+  font-size: 21rpx;
+  font-weight: 800;
+}
+.hero-title {
+  font-size: 52rpx;
+  font-weight: 900;
+  line-height: 1.25;
+  margin: 22rpx 0 12rpx;
+}
+.hero-desc {
+  color: #d9e4dd;
+  font-size: 24rpx;
+  line-height: 1.8;
+  max-width: 560rpx;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+  margin-top: 30rpx;
+}
+.stat {
+  border-top: 1rpx solid rgba(255, 255, 255, 0.25);
+  padding-top: 18rpx;
+  display: flex;
+  flex-direction: column;
+}
+.stat .num {
+  font-size: 34rpx;
+  font-weight: 900;
+  color: var(--lime);
+}
+.stat .lb {
+  font-size: 20rpx;
+  color: #cfdcd4;
+  margin-top: 4rpx;
+}
+.hero-note {
+  margin-top: 18rpx;
+  font-size: 18rpx;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* 快捷入口 */
+.quick {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18rpx;
+  padding: 30rpx 4rpx 6rpx;
+}
+.qitem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+  font-size: 23rpx;
+}
+.qitem .icon {
+  width: 92rpx;
+  height: 92rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 30rpx;
+  background: var(--card);
+  display: grid;
+  place-items: center;
+  font-size: 42rpx;
+  box-shadow: 0 8rpx 22rpx rgba(24, 52, 43, 0.06);
+}
+
+/* 区块与分类 */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 36rpx 4rpx 20rpx;
+}
+.section-title {
+  font-size: 36rpx;
+  font-weight: 800;
+}
+.chips {
+  white-space: nowrap;
+  margin-bottom: 22rpx;
+}
+.chip {
+  display: inline-block;
+  padding: 10rpx 26rpx;
+  margin-right: 16rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid var(--line);
+  background: var(--card);
+  font-size: 24rpx;
+  color: var(--muted);
+}
+.chip.on {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+  font-weight: 700;
+}
+
+/* 商品网格 */
+.products {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+}
+
+/* 助残使命卡 */
+.mission {
+  margin-top: 34rpx;
+  background: #efe7cd;
+  border: 1rpx solid #d9c99b;
+  border-radius: 30rpx;
+  padding: 28rpx;
+  display: flex;
+  gap: 20rpx;
+  align-items: center;
+}
+.mission .badge {
+  font-size: 52rpx;
+}
+.m-t {
+  font-size: 27rpx;
+  font-weight: 800;
+}
+.m-d {
+  margin-top: 6rpx;
+  color: var(--muted);
+  font-size: 22rpx;
+  line-height: 1.6;
+}

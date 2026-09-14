@@ -1,0 +1,120 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <view class="me-card card">
+    <view class="me-top">
+      <view class="me-avatar">{{user.avatarText}}</view>
+      <view class="me-info">
+        <view class="me-name">{{user.nickname}} <text class="pill {{statusPill}}">{{statusLabel}}</text></view>
+        <view class="me-meta">{{user.badge}} · 推广编号 {{user.agentNo}}</view>
+      </view>
+    </view>
+    <view class="qual-line" bindtap="onQualify">
+      <text>三重资格校验 {{passedCount}}/3</text>
+      <text class="chev">去查看 ›</text>
+    </view>
+    <view class="frozen-line" wx:if="{{qual.status === 'FROZEN'}}" bindtap="onQualify">
+      资格已冻结：团购与提现暂不可用，历史收益与流水不受影响；点此查看复核
+    </view>
+    <view class="frozen-line" wx:if="{{qual.status === 'CANCELLED'}}" bindtap="onQualify">
+      资格已注销：重新完成三重校验后可再次激活；点此前往资格页
+    </view>
+    <view class="checks">
+      <view wx:for="{{checks}}" wx:key="key" class="check {{item.passed ? 'on' : ''}}">
+        {{item.passed ? '✓' : '○'}} {{item.label}}
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">
+      近 7 日收益（元）
+      <text class="muted">合计 ¥{{weekSumText}}</text>
+    </view>
+    <view class="chart">
+      <view class="bar-item" wx:for="{{bars}}" wx:key="label">
+        <view class="bar-num">{{item.text}}</view>
+        <view class="bar-track"><view class="bar-fill" style="height: {{item.pct}}%"></view></view>
+        <view class="bar-label">{{item.label}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{totals}}">
+    <view class="card-title">收益概览</view>
+    <view class="grid3">
+      <view class="cell">
+        <view class="cell-num">¥{{fmt.yuan(totals.estimatedFen)}}</view>
+        <view class="cell-label">预计</view>
+      </view>
+      <view class="cell">
+        <view class="cell-num">¥{{fmt.yuan(totals.frozenFen)}}</view>
+        <view class="cell-label">冻结</view>
+      </view>
+      <view class="cell">
+        <view class="cell-num ok">{{'¥' + fmt.yuan(totals.readyFen)}}</view>
+        <view class="cell-label">可结算</view>
+      </view>
+    </view>
+    <view class="flex-between mt14">
+      <text class="muted">可提现 ¥{{fmt.yuan(totals.withdrawableFen)}} · 已结算 ¥{{fmt.yuan(totals.settledFen)}}</text>
+      <view class="mini-links">
+        <text class="link" bindtap="onIncome">收益看板</text>
+        <text class="link" bindtap="onWithdraw">去提现</text>
+      </view>
+    </view>
+    <view class="muted">数据仅供参考，不构成收益承诺。</view>
+  </view>
+
+  <view class="card" wx:if="{{team}}">
+    <view class="card-title">
+      团队经营（本月）
+      <text class="muted">{{team.monthTargetLabel}}</text>
+    </view>
+    <view class="grid2">
+      <view class="cell"><view class="cell-num">{{team.directCount}}</view><view class="cell-label">直推客户</view></view>
+      <view class="cell"><view class="cell-num">{{team.indirectCount}}</view><view class="cell-label">间推客户</view></view>
+      <view class="cell"><view class="cell-num">{{team.monthOrders}}</view><view class="cell-label">本月订单</view></view>
+      <view class="cell"><view class="cell-num">¥{{fmt.yuan(team.monthVolumeFen)}}</view><view class="cell-label">本月成交额</view></view>
+    </view>
+    <view class="progress"><view class="bar" style="width: {{monthPct}}%"></view></view>
+    <view class="muted">月度目标完成 {{monthPct}}%（按日结批次计算）。</view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">经营工具</view>
+    <view class="tools">
+      <view class="tool" bindtap="onShare" aria-label="推广码与分享">
+        <view class="tool-icon">▣</view><view class="tool-name">推广码/分享</view>
+      </view>
+      <view class="tool" bindtap="onQualify" aria-label="资格与审核">
+        <view class="tool-icon">☑</view><view class="tool-name">资格与审核</view>
+      </view>
+      <view class="tool" bindtap="onLedger" aria-label="佣金流水">
+        <view class="tool-icon">☰</view><view class="tool-name">佣金流水</view>
+      </view>
+      <view class="tool" bindtap="onWithdraw" aria-label="申请提现">
+        <view class="tool-icon">¥</view><view class="tool-name">申请提现</view>
+      </view>
+      <view class="tool" bindtap="onConsign" aria-label="仓内寄存">
+        <view class="tool-icon">▤</view><view class="tool-name">仓内寄存</view>
+      </view>
+      <view class="tool" bindtap="onDashboard" aria-label="数据看板">
+        <view class="tool-icon">▦</view><view class="tool-name">数据看板</view>
+      </view>
+      <view class="tool" bindtap="onOrders" aria-label="我的订单">
+        <view class="tool-icon">☰</view><view class="tool-name">我的订单</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">佣金试算参数</view>
+    <view class="flex-between rate-row" wx:for="{{rates}}" wx:key="label">
+      <text>{{item.label}}</text>
+      <text class="rate">{{item.rate}}</text>
+    </view>
+    <view class="muted">逐笔可解释：每笔佣金按「商品实付金额 × 对应比例」试算；退款订单生成负向冲销流水；比例需客户书面确认后生效。</view>
+  </view>
+
+  <view class="disclaimer">{{disclaimer}}</view>
+</view>

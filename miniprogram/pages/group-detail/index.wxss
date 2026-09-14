@@ -1,0 +1,191 @@
+.page {
+  padding: 20rpx 28rpx 80rpx;
+}
+
+/* 商品卡 */
+.hero {
+  padding: 28rpx;
+}
+.h-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 20rpx;
+}
+.h-emoji {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 24rpx;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.h-emoji .emoji {
+  font-size: 76rpx;
+}
+.h-info {
+  flex: 1;
+  min-width: 0;
+}
+.h-title {
+  font-size: 32rpx;
+  font-weight: 800;
+}
+.h-spec {
+  font-size: 23rpx;
+  color: var(--muted);
+  margin-top: 8rpx;
+  line-height: 1.5;
+}
+.h-price {
+  margin-top: 14rpx;
+}
+.h-price .sym {
+  font-size: 26rpx;
+  color: var(--orange);
+  font-weight: 800;
+}
+.h-price .num {
+  font-size: 44rpx;
+  font-weight: 900;
+  color: var(--orange);
+}
+.h-price .origin {
+  font-size: 24rpx;
+  color: var(--muted);
+  text-decoration: line-through;
+  margin-left: 12rpx;
+}
+
+/* 进度 */
+.p-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 25rpx;
+}
+.strong {
+  font-weight: 800;
+  color: var(--green);
+}
+.cd-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 0 6rpx;
+}
+
+/* 表单 */
+.sub-title {
+  font-size: 25rpx;
+  font-weight: 700;
+  margin: 22rpx 0 12rpx;
+}
+.opt {
+  display: flex;
+  align-items: flex-start;
+  gap: 16rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 16rpx;
+  padding: 20rpx 18rpx;
+  margin-bottom: 14rpx;
+}
+.opt.on {
+  border-color: var(--green);
+  background: #eef5ef;
+}
+.opt-radio {
+  color: var(--green);
+  font-size: 26rpx;
+}
+.opt-body {
+  flex: 1;
+}
+.opt-label {
+  font-size: 26rpx;
+  font-weight: 700;
+}
+.opt-desc {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-top: 6rpx;
+}
+.remark {
+  border: 1rpx solid var(--line);
+  border-radius: 14rpx;
+  padding: 18rpx;
+  font-size: 26rpx;
+  background: #fbf8ef;
+}
+
+/* 规则 */
+.rule {
+  font-size: 25rpx;
+  line-height: 1.8;
+}
+
+/* 团购统计 */
+.stats {
+  display: flex;
+  padding: 8rpx 0 18rpx;
+}
+.st-item {
+  flex: 1;
+  text-align: center;
+  border-right: 1rpx dashed var(--line);
+}
+.st-item:last-child {
+  border-right: none;
+}
+.st-num {
+  font-size: 30rpx;
+  font-weight: 900;
+}
+.st-label {
+  font-size: 21rpx;
+  color: var(--muted);
+  margin-top: 6rpx;
+}
+.mt18 {
+  margin-top: 18rpx;
+}
+
+/* 团购海报弹层 */
+.poster-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: rgba(12, 30, 24, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.poster-box {
+  width: 76%;
+}
+.poster-img {
+  width: 100%;
+  border-radius: 20rpx;
+  box-shadow: var(--shadow);
+}
+.poster-loading {
+  color: #fff;
+  text-align: center;
+  padding: 80rpx 0;
+}
+.poster-actions {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+.poster-actions .cta.ghost {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.12);
+}
+.poster-canvas {
+  position: fixed;
+  left: -999px;
+  top: 0;
+  width: 310px;
+  height: 560px;
+}

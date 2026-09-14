@@ -1,0 +1,50 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <block wx:if="{{items.length}}">
+    <view class="card item" wx:for="{{items}}" wx:key="id">
+      <view
+        class="check {{item.selected ? 'on' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="onToggle"
+        aria-label="{{item.selected ? '取消选择' : '选择'}} {{item.name}}"
+      >{{item.selected ? '✓' : ''}}</view>
+      <view class="visual {{item.visual}}">
+        <text class="emoji">{{item.emoji}}</text>
+      </view>
+      <view class="info">
+        <view class="name">{{item.name}}</view>
+        <view class="spec">{{item.spec}}</view>
+        <view class="bottom">
+          <view class="price"><text class="sym">¥</text><text class="num">{{fmt.yuan(item.priceFen)}}</text></view>
+          <view class="stepper">
+            <view class="op {{item.qty <= 1 ? 'disabled' : ''}}" data-id="{{item.id}}" bindtap="onMinus" aria-label="减少数量">−</view>
+            <view class="qty">{{item.qty}}</view>
+            <view class="op" data-id="{{item.id}}" bindtap="onPlus" aria-label="增加数量">+</view>
+          </view>
+        </view>
+      </view>
+      <view class="del" data-id="{{item.id}}" bindtap="onRemove" aria-label="删除 {{item.name}}">✕</view>
+    </view>
+
+    <view class="footer-bar">
+      <view class="all" bindtap="onToggleAll" aria-label="全选">
+        <view class="check {{allSelected ? 'on' : ''}}">{{allSelected ? '✓' : ''}}</view>
+        <text>全选</text>
+      </view>
+      <view class="total">
+        合计（{{selectedCount}}件）
+        <text class="price-num">¥{{fmt.yuan(totalFen)}}</text>
+      </view>
+      <button class="cta {{selectedCount ? '' : 'disabled'}}" bindtap="onCheckout" aria-label="去结算">去结算</button>
+    </view>
+  </block>
+
+  <view wx:if="{{!loading && !items.length}}" class="empty">
+    <view class="empty-cart">
+      <view class="handle"></view>
+      <view class="body"></view>
+    </view>
+    购物车还是空的
+    <button class="cta ghost empty-btn" bindtap="onGoHome" aria-label="去逛逛">去逛逛</button>
+  </view>
+</view>

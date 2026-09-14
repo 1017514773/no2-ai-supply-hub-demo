@@ -1,0 +1,14 @@
+<view wx:if="{{show}}" class="mask" bindtap="onClose">
+  <view class="sheet" catchtap="noop">
+    <view class="sheet-title">微信支付</view>
+    <view class="amount">¥<text class="num">{{amountText}}</text></view>
+    <view class="tip">点击下方按钮完成支付，服务端将实时收到回调验签。</view>
+    <block wx:if="{{payParams}}">
+      <view class="kv">订单号：{{payParams.orderNo}}</view>
+      <view class="kv">transactionId：{{payParams.transactionId}}</view>
+    </block>
+    <button class="cta" bindtap="onPay" disabled="{{busy}}" aria-label="确认支付">确认支付</button>
+    <button class="cta alt" bindtap="onDuplicateCallback" disabled="{{busy}}" aria-label="验证重复回调">再次发送回调</button>
+    <button class="cta ghost" bindtap="onClose" aria-label="暂不支付">暂不支付</button>
+  </view>
+</view>

@@ -1,0 +1,73 @@
+.page {
+  padding: 20rpx 28rpx 80rpx;
+}
+.tabs {
+  white-space: nowrap;
+  margin-bottom: 22rpx;
+}
+.tab {
+  display: inline-block;
+  padding: 12rpx 30rpx;
+  margin-right: 16rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid var(--line);
+  background: var(--card);
+  font-size: 25rpx;
+  color: var(--muted);
+}
+.tab.on {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+  font-weight: 700;
+}
+.order {
+  padding: 26rpx;
+}
+.o-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 18rpx;
+  border-bottom: 1rpx dashed var(--line);
+}
+.o-no {
+  color: var(--muted);
+  font-size: 23rpx;
+}
+.o-body {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  padding: 22rpx 0;
+}
+.o-emoji {
+  font-size: 52rpx;
+  width: 120rpx;
+}
+.o-info {
+  flex: 1;
+  min-width: 0;
+}
+.o-title {
+  font-size: 27rpx;
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.o-meta {
+  color: var(--muted);
+  font-size: 21rpx;
+  margin-top: 6rpx;
+}
+.o-amount {
+  font-weight: 800;
+  font-size: 30rpx;
+}
+.o-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16rpx;
+  padding-top: 6rpx;
+}

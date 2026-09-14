@@ -1,0 +1,52 @@
+.page {
+  padding: 20rpx 28rpx 160rpx;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 24rpx 4rpx;
+  border-bottom: 1rpx solid var(--line);
+}
+.field:last-child {
+  border-bottom: none;
+}
+.f-label {
+  width: 160rpx;
+  color: var(--muted);
+  font-size: 25rpx;
+  flex-shrink: 0;
+}
+.f-input {
+  flex: 1;
+  font-size: 27rpx;
+}
+.f-input.placeholder {
+  color: #b3b0a6;
+}
+.chev {
+  color: var(--muted);
+  font-size: 32rpx;
+}
+
+.tags {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
+}
+.tag-chip {
+  padding: 8rpx 26rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid var(--line);
+  font-size: 23rpx;
+  color: var(--muted);
+  background: #fff;
+}
+.tag-chip.on {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+  font-weight: 700;
+}

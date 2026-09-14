@@ -1,0 +1,97 @@
+.page {
+  padding: 20rpx 28rpx 80rpx;
+}
+
+/* 二维码卡 */
+.qr-card {
+  text-align: center;
+  padding: 40rpx 30rpx;
+}
+.qr-title {
+  font-size: 32rpx;
+  font-weight: 800;
+  margin-bottom: 24rpx;
+}
+.code-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 26rpx;
+  padding: 12rpx 30rpx;
+  border-radius: 999rpx;
+  background: #eef5ef;
+}
+.code-no {
+  font-size: 40rpx;
+  font-weight: 900;
+  letter-spacing: 6rpx;
+  color: var(--green);
+  font-family: monospace;
+}
+.copy-tag {
+  font-size: 22rpx;
+  color: var(--green);
+  border: 1rpx solid var(--green);
+  border-radius: 999rpx;
+  padding: 2rpx 14rpx;
+}
+.qr-name {
+  color: var(--muted);
+  font-size: 24rpx;
+  margin-top: 16rpx;
+}
+
+.mt18 {
+  margin-top: 18rpx;
+}
+.rule {
+  font-size: 24rpx;
+  line-height: 1.8;
+}
+
+/* 归属记录 */
+.rf {
+  padding: 20rpx 0;
+  border-bottom: 1rpx dashed var(--line);
+}
+.rf:last-of-type {
+  border-bottom: none;
+}
+.rf-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.rf-left {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+.rf-name {
+  font-size: 28rpx;
+  font-weight: 800;
+}
+.rf-meta {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-top: 8rpx;
+}
+.rf-note {
+  font-size: 22rpx;
+  color: var(--green);
+  background: #eef5ef;
+  border-radius: 10rpx;
+  padding: 10rpx 14rpx;
+  margin-top: 10rpx;
+  line-height: 1.55;
+}
+.rf-note.warn {
+  color: var(--orange);
+  background: #fdf3ec;
+}
+.rf-ops {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  margin-top: 14rpx;
+}

@@ -1,0 +1,38 @@
+<view class="page">
+  <view class="card head">
+    <view class="head-row">
+      <view class="ai-avatar">✦</view>
+      <view class="head-info">
+        <view class="head-title">AI 小助手（P1 预览）</view>
+        <view class="muted">帮助分销员做选品建议、规则答疑与话术生成</view>
+      </view>
+      <text class="clear" bindtap="onClear" aria-label="清空对话">清空</text>
+    </view>
+  </view>
+
+  <view class="chat">
+    <view wx:for="{{messages}}" wx:key="id" class="msg {{item.role}}">
+      <view class="bubble">{{item.text}}</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">常见问题（点击体验）</view>
+    <view class="chips">
+      <view
+        wx:for="{{presets}}"
+        wx:key="q"
+        class="chip"
+        data-idx="{{index}}"
+        bindtap="onPreset"
+        aria-label="提问：{{item.q}}"
+      >{{item.q}}</view>
+    </view>
+    <view class="input-row" bindtap="onInputTap" aria-label="输入框（P1 规划中）">
+      <text class="input-ph">自由对话（P1 规划中）…</text>
+      <view class="send">发送</view>
+    </view>
+  </view>
+
+  <view class="disclaimer">P1 能力预览：当前为预置问答，不接入真实大模型；不提供医疗、投资与收益承诺类建议。</view>
+</view>

@@ -1,0 +1,11 @@
+<view class="qr-wrap" aria-label="推广二维码">
+  <view class="qr-grid">
+    <view
+      wx:for="{{cells}}"
+      wx:key="index"
+      class="cell {{item ? 'on' : ''}}"
+      style="width:{{cellRpx}}rpx;height:{{cellRpx}}rpx;"
+    ></view>
+  </view>
+  <view class="qr-logo">{{brandMark}}</view>
+</view>

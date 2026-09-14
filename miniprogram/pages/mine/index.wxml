@@ -1,0 +1,62 @@
+<view class="page">
+  <view class="me-card card">
+    <view class="me-top">
+      <view class="me-avatar">{{user ? user.avatarText : ''}}</view>
+      <view class="me-info">
+        <view class="me-name">{{user ? user.nickname : '未登录'}}</view>
+        <view class="me-meta">{{user ? user.badge : ''}}</view>
+        <view class="me-sub">
+          <text wx:if="{{user}}">推广编号 {{user.agentNo}}</text>
+          <text wx:if="{{user}}" class="realname">{{user.realnameStatus === 'VERIFIED' ? '已实名' : '未实名'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card orders">
+    <view class="card-title">
+      我的订单
+      <text class="link" data-tab="ALL" bindtap="onOrders">全部订单 ›</text>
+    </view>
+    <view class="o-grid">
+      <view
+        class="o-entry"
+        wx:for="{{orderTabs}}"
+        wx:key="key"
+        data-tab="{{item.key}}"
+        bindtap="onOrders"
+        aria-label="查看{{item.label}}订单"
+      >
+        <view class="o-icon">{{item.icon}}</view>
+        <view class="o-label">{{item.label}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">服务与工具</view>
+    <view class="t-grid">
+      <view
+        class="t-item"
+        wx:for="{{tools}}"
+        wx:key="key"
+        data-key="{{item.key}}"
+        bindtap="onTool"
+        aria-label="{{item.label}}"
+      >
+        <view class="t-icon">{{item.icon}}</view>
+        <view class="t-label">{{item.label}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">数据管理</view>
+    <view class="muted">金额、订单、佣金数据存储于本机；如需对接正式服务，修改 config/env.js 的 baseUrl 即可。</view>
+    <button class="cta ghost mt18" bindtap="onReset" aria-label="重置数据">
+      {{resetting ? '重置中…' : '重置数据'}}
+    </button>
+  </view>
+
+  <view class="disclaimer">{{disclaimer}}</view>
+</view>

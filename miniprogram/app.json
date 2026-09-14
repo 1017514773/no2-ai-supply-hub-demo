@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/search/index",
+    "pages/product-detail/index",
+    "pages/cart/index",
+    "pages/order-confirm/index",
+    "pages/order-list/index",
+    "pages/order-detail/index",
+    "pages/aftersale-apply/index",
+    "pages/group-list/index",
+    "pages/group-detail/index",
+    "pages/group-create/index",
+    "pages/agent/index",
+    "pages/agent-qualify/index",
+    "pages/agent-share/index",
+    "pages/income/index",
+    "pages/income-detail/index",
+    "pages/withdraw/index",
+    "pages/mine/index",
+    "pages/consign/index",
+    "pages/address-list/index",
+    "pages/address-edit/index",
+    "pages/opc-ledger/index",
+    "pages/reconcile/index",
+    "pages/dashboard/index",
+    "pages/stock-ledger/index",
+    "pages/ai-assistant/index",
+    "pages/warehouse/index",
+    "pages/wecom/index",
+    "pages/ai-studio/index",
+    "pages/supplier/index",
+    "pages/agreements/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#f7f3e8",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "AI Supply Hub",
+    "backgroundColor": "#f7f3e8",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#7b817d",
+    "selectedColor": "#155c45",
+    "backgroundColor": "#fffdf7",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/home/index", "text": "首页" },
+      { "pagePath": "pages/group-list/index", "text": "团购" },
+      { "pagePath": "pages/agent/index", "text": "经营台" },
+      { "pagePath": "pages/income/index", "text": "收益" },
+      { "pagePath": "pages/mine/index", "text": "我的" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

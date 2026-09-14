@@ -1,0 +1,61 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <scroll-view scroll-x class="tabs" enhanced show-scrollbar="{{false}}">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="key"
+      class="tab {{activeTab === item.key ? 'on' : ''}}"
+      data-key="{{item.key}}"
+      bindtap="onSwitchTab"
+      aria-label="筛选 {{item.label}} 流水"
+    >{{item.label}}</view>
+  </scroll-view>
+
+  <view class="card total-bar" wx:if="{{totals}}">
+    <view class="tb-item">
+      <view class="tb-num">¥{{fmt.yuan(totals.readyFen)}}</view>
+      <view class="tb-label">可结算</view>
+    </view>
+    <view class="tb-item">
+      <view class="tb-num">¥{{fmt.yuan(totals.estimatedFen)}}</view>
+      <view class="tb-label">预计</view>
+    </view>
+    <view class="tb-item">
+      <view class="tb-num">¥{{fmt.yuan(totals.frozenFen)}}</view>
+      <view class="tb-label">冻结</view>
+    </view>
+    <view class="tb-item">
+      <view class="tb-num">¥{{fmt.yuan(totals.settledFen)}}</view>
+      <view class="tb-label">已结算</view>
+    </view>
+  </view>
+
+  <view class="card cm" wx:for="{{list}}" wx:key="id">
+    <view class="cm-head">
+      <view class="cm-left">
+        <text class="cm-type">{{item.typeLabel}}</text>
+        <text class="pill {{item.pill}}">{{item.statusLabel}}</text>
+      </view>
+      <text class="cm-amount {{item.negative ? 'neg' : ''}}">{{item.amountText}}</text>
+    </view>
+    <view class="cm-meta">
+      {{item.timeText}}
+      <block wx:if="{{item.orderNo}}"> · 订单 {{item.orderNo}}</block>
+      <block wx:if="{{item.customerName}}"> · {{item.customerName}}</block>
+    </view>
+    <view class="cm-explain">{{item.explain}}</view>
+    <view class="cm-ops" wx:if="{{item.canFreeze || item.canUnfreeze}}">
+      <button wx:if="{{item.canFreeze}}" class="cta small ghost" data-id="{{item.id}}" bindtap="onFreeze" aria-label="冻结该笔佣金">冻结（风控复核）</button>
+      <button wx:if="{{item.canUnfreeze}}" class="cta small" data-id="{{item.id}}" bindtap="onUnfreeze" aria-label="解冻该笔佣金">解冻转回可结算</button>
+    </view>
+    <view class="cm-foot warn" wx:if="{{item.frozenText}}">冻结时间：{{item.frozenText}} · {{item.freezeReason}}</view>
+    <view class="cm-foot" wx:if="{{item.settledText}}">结算时间：{{item.settledText}}</view>
+    <view class="cm-foot warn" wx:if="{{item.reversedText}}">冲销时间：{{item.reversedText}}（原记录不计入统计）</view>
+  </view>
+
+  <view wx:if="{{!loading && !list.length}}" class="empty">
+    <text class="icon">☰</text>暂无相关流水
+  </view>
+
+  <view class="disclaimer">逐笔金额按「基数 × 比例」试算并附计算说明，不构成收益承诺。流水冻结 / 解冻为风控后台操作，均写入审计日志。</view>
+</view>

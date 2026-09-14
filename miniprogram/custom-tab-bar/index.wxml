@@ -1,0 +1,34 @@
+<view class="tabbar">
+  <view
+    wx:for="{{list}}"
+    wx:key="pagePath"
+    class="tab {{selected === index ? 'active' : ''}}"
+    data-index="{{index}}"
+    bindtap="onTap"
+    aria-label="{{item.text}}"
+  >
+    <view class="ico ico-{{item.icon}}">
+      <block wx:if="{{item.icon === 'home'}}">
+        <view class="roof"></view>
+        <view class="body"></view>
+      </block>
+      <block wx:elif="{{item.icon === 'bag'}}">
+        <view class="handle"></view>
+        <view class="body"></view>
+      </block>
+      <block wx:elif="{{item.icon === 'bars'}}">
+        <view class="b b1"></view>
+        <view class="b b2"></view>
+        <view class="b b3"></view>
+      </block>
+      <block wx:elif="{{item.icon === 'coin'}}">
+        <view class="ring"><text class="c">¥</text></view>
+      </block>
+      <block wx:else>
+        <view class="head"></view>
+        <view class="body"></view>
+      </block>
+    </view>
+    <text class="label">{{item.text}}</text>
+  </view>
+</view>

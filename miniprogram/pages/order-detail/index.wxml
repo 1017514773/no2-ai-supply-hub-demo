@@ -1,0 +1,156 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <block wx:if="{{order}}">
+    <view class="hero">
+      <view class="hero-top">
+        <text class="pill {{order.pill}}">{{order.statusLabel}}</text>
+        <text class="hero-no">{{order.orderNo}}</text>
+      </view>
+      <view class="hero-desc">{{order.statusDesc}}</view>
+      <view class="hero-tags">
+        <text class="tag">{{order.fulfillmentLabel}}</text>
+        <text class="tag {{order.countable ? 'ok' : 'off'}}">{{order.countableText}}</text>
+      </view>
+    </view>
+
+    <view class="card" wx:if="{{order.fulfillment === 'PICKUP'}}">
+      <view class="card-title">自提信息</view>
+      <block wx:if="{{order.pickupCode}}">
+        <view class="code-box">
+          <view class="code-num">{{order.pickupCode}}</view>
+          <view class="code-tip">到仓出示核销码，核销后订单完成</view>
+        </view>
+      </block>
+      <view class="row"><text class="label">自提点</text><text>{{pickupPoint.name}}</text></view>
+      <view class="row"><text class="label">地址</text><text>{{pickupPoint.address}}</text></view>
+      <view class="row"><text class="label">营业时间</text><text>{{pickupPoint.hours}}</text></view>
+    </view>
+
+    <view class="card" wx:if="{{order.fulfillment === 'DELIVERY' && order.addressSnapshot}}">
+      <view class="card-title">收货信息</view>
+      <view class="row"><text class="label">收货人</text><text>{{order.addressSnapshot.name}}　{{order.addressSnapshot.phone}}</text></view>
+      <view class="row"><text class="label">地址</text><text>{{order.addressSnapshot.region}} {{order.addressSnapshot.detail}}</text></view>
+      <view class="row" wx:if="{{order.trackingNo}}">
+        <text class="label">物流单号</text>
+        <text class="link" bindtap="onCopyTracking" aria-label="复制物流单号">{{order.trackingNo}}（点击复制）</text>
+      </view>
+      <view class="row" wx:if="{{order.outboundNo}}">
+        <text class="label">出库单号</text>
+        <text class="link" bindtap="onCopyOutbound" aria-label="复制出库单号">{{order.outboundNo}}（点击复制）</text>
+      </view>
+    </view>
+
+    <view class="card" wx:if="{{order.fulfillment === 'CONSIGN'}}">
+      <view class="card-title">寄存信息</view>
+      <view class="row" wx:if="{{order.consignLotNos.length}}">
+        <text class="label">寄存批次</text>
+        <text>{{order.consignLotText}}</text>
+      </view>
+      <view class="muted">寄存货物货权与有效期可追溯（180 天），可在「我的 → 仓内寄存」查看并申请发货。</view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">四组状态</view>
+      <view class="grid">
+        <view class="g-item" wx:for="{{statusGrid}}" wx:key="label">
+          <view class="g-label">{{item.label}}</view>
+          <view class="g-value">{{item.value}}</view>
+        </view>
+      </view>
+      <view class="muted">结算口径：佣金基数按商品实付金额（不含运费）计算；本单{{order.countableText}}。</view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">商品清单（{{order.itemCount}} 件）</view>
+      <view class="item" wx:for="{{order.items}}" wx:key="productId">
+        <text class="i-emoji">{{item.emoji}}</text>
+        <view class="i-body">
+          <view class="i-name">{{item.name}}</view>
+          <view class="i-spec">{{item.spec}}</view>
+        </view>
+        <view class="i-right">
+          <view class="i-price">¥{{fmt.yuan(item.priceFen)}}</view>
+          <view class="i-qty">x{{item.qty}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">金额明细</view>
+      <view class="row"><text class="label">商品金额</text><text>¥{{fmt.yuan(order.productAmountFen)}}</text></view>
+      <view class="row"><text class="label">运费</text><text>{{order.freightText}}</text></view>
+      <view class="row total-row">
+        <text class="label">实付金额</text>
+        <text class="amount">¥{{fmt.yuan(order.payableFen)}}</text>
+      </view>
+      <view class="row" wx:if="{{order.refundAmountFen}}">
+        <text class="label">已退款</text>
+        <text class="refund">-¥{{fmt.yuan(order.refundAmountFen)}}</text>
+      </view>
+      <view class="muted" wx:if="{{order.remark}}">订单备注：{{order.remark}}</view>
+    </view>
+
+    <view class="card" wx:if="{{order.afterSale}}">
+      <view class="card-title">售后单</view>
+      <view class="row"><text class="label">申请原因</text><text>{{order.afterSale.reason}}</text></view>
+      <view class="row"><text class="label">退款金额</text><text>¥{{fmt.yuan(order.afterSale.amountFen)}}</text></view>
+      <view class="row"><text class="label">审核状态</text><text>{{order.afterSale.statusLabel}}</text></view>
+      <view class="row" wx:if="{{order.afterSale.refundNo}}"><text class="label">退款单号</text><text>{{order.afterSale.refundNo}}</text></view>
+      <view class="row" wx:if="{{order.afterSale.remark}}"><text class="label">备注</text><text>{{order.afterSale.remark}}</text></view>
+      <view class="muted">申请时间：{{order.afterSale.createdText}}</view>
+    </view>
+
+    <view class="card" wx:if="{{order.commissions.length}}">
+      <view class="card-title">佣金明细（{{order.commissions.length}} 笔）</view>
+      <view class="cm" wx:for="{{order.commissions}}" wx:key="id">
+        <view class="cm-head">
+          <text class="cm-type">{{item.typeLabel}}</text>
+          <text class="cm-amount {{item.negative ? 'neg' : ''}}">{{item.amountText}}</text>
+        </view>
+        <view class="cm-meta">{{item.statusLabel}} · {{item.timeText}}</view>
+        <view class="cm-explain">{{item.explain}}</view>
+      </view>
+      <view class="muted">数据仅供参考，不构成收益承诺；退款单保留历史流水并生成负向冲销。</view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">订单轨迹</view>
+      <view class="tl" wx:for="{{timeline}}" wx:key="id">
+        <view class="tl-dot"></view>
+        <view class="tl-body">
+          <view class="tl-text">{{item.text}}</view>
+          <view class="tl-time">{{item.atText}}</view>
+        </view>
+      </view>
+      <view wx:if="{{!timeline.length}}" class="muted">暂无轨迹</view>
+    </view>
+
+    <view class="card" wx:if="{{canShip || canVerify || canAudit}}">
+      <view class="card-title">订单操作</view>
+      <view class="ops-panel">
+        <view class="t">点击触发对应后台动作；正式版由仓库系统与客服后台自动流转。</view>
+        <view class="ops">
+          <button wx:if="{{canShip}}" class="cta small ghost" bindtap="onShip" aria-label="{{shipLabel}}">{{shipLabel}}</button>
+          <button wx:if="{{canVerify}}" class="cta small ghost" bindtap="onVerify" aria-label="自提核销">自提核销</button>
+          <button wx:if="{{canAudit}}" class="cta small ghost" bindtap="onReject" aria-label="客服驳回">客服驳回</button>
+          <button wx:if="{{canAudit}}" class="cta small" bindtap="onApprove" aria-label="客服审核通过">审核通过退款</button>
+        </view>
+      </view>
+    </view>
+
+    <view class="disclaimer">金额、佣金以实际结算为准，不构成收益承诺。</view>
+
+    <view class="footer-bar" wx:if="{{canPay || canCancel || canConfirm || canAfterSale}}">
+      <button wx:if="{{canCancel}}" class="cta ghost" bindtap="onCancel" aria-label="取消订单">取消订单</button>
+      <button wx:if="{{canAfterSale}}" class="cta ghost" bindtap="onAfterSale" aria-label="申请售后">申请售后</button>
+      <button wx:if="{{canConfirm}}" class="cta" bindtap="onConfirm" aria-label="确认收货">确认收货</button>
+      <button wx:if="{{canPay}}" class="cta" bindtap="onPay" aria-label="去支付">去支付</button>
+    </view>
+  </block>
+
+  <view wx:if="{{!loading && !order}}" class="empty">
+    <text class="icon">📦</text>订单不存在或已删除
+  </view>
+
+  <pay-sheet show="{{showPay}}" order="{{order}}" bind:success="onPaySuccess" bind:close="onPayClose" />
+</view>

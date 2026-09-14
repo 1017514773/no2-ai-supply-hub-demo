@@ -1,0 +1,52 @@
+.page {
+  padding: 24rpx 28rpx 60rpx;
+}
+.searchbar {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  background: var(--card);
+  border: 1rpx solid var(--line);
+  border-radius: 999rpx;
+  padding: 8rpx 12rpx 8rpx 30rpx;
+}
+.input {
+  flex: 1;
+  font-size: 27rpx;
+  height: 68rpx;
+}
+.go {
+  background: var(--green);
+  color: #fff;
+  border-radius: 999rpx;
+  padding: 14rpx 34rpx;
+  font-size: 25rpx;
+  font-weight: 700;
+}
+.hots {
+  margin-top: 36rpx;
+}
+.h-title {
+  font-size: 28rpx;
+  font-weight: 800;
+  margin-bottom: 20rpx;
+}
+.h-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18rpx;
+}
+.hot {
+  padding: 12rpx 30rpx;
+  border-radius: 999rpx;
+  background: var(--card);
+  border: 1rpx solid var(--line);
+  font-size: 24rpx;
+  color: var(--muted);
+}
+.products {
+  margin-top: 30rpx;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+}

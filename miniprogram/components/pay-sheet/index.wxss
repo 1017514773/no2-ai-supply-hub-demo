@@ -1,0 +1,60 @@
+.mask {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: rgba(12, 30, 24, 0.55);
+  display: flex;
+  align-items: flex-end;
+}
+.sheet {
+  width: 100%;
+  background: var(--card);
+  border-radius: 36rpx 36rpx 0 0;
+  padding: 40rpx 32rpx calc(40rpx + env(safe-area-inset-bottom));
+}
+.sheet-title {
+  font-size: 34rpx;
+  font-weight: 800;
+}
+.amount {
+  margin: 26rpx 0 8rpx;
+  color: var(--orange);
+  font-size: 34rpx;
+  font-weight: 800;
+}
+.amount .num {
+  font-size: 68rpx;
+}
+.tip {
+  color: var(--muted);
+  font-size: 23rpx;
+  line-height: 1.7;
+  margin-bottom: 16rpx;
+}
+.kv {
+  color: var(--muted);
+  font-size: 22rpx;
+  padding: 6rpx 0;
+}
+.cta {
+  width: 100%;
+  background: var(--green);
+  color: #fff;
+  border-radius: 18rpx;
+  padding: 22rpx 0;
+  text-align: center;
+  font-weight: 700;
+  margin-top: 18rpx;
+}
+.cta.alt {
+  background: var(--lime);
+  color: var(--ink);
+}
+.cta.ghost {
+  background: transparent;
+  color: var(--green);
+  border: 2rpx solid var(--green);
+}
+.cta[disabled] {
+  opacity: 0.5;
+}

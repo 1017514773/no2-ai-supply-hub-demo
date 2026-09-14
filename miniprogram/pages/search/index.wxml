@@ -1,0 +1,40 @@
+<view class="page">
+  <view class="searchbar">
+    <input
+      class="input"
+      placeholder="搜索源头好货"
+      value="{{keyword}}"
+      bindinput="onInput"
+      bindconfirm="onSearch"
+      confirm-type="search"
+      focus
+      aria-label="搜索商品关键词"
+    />
+    <view class="go" bindtap="onSearch" aria-label="搜索">搜索</view>
+  </view>
+
+  <view class="hots" wx:if="{{!searched}}">
+    <view class="h-title">热门搜索</view>
+    <view class="h-list">
+      <view class="hot" data-kw="蓝莓" bindtap="onHotTap">蓝莓</view>
+      <view class="hot" data-kw="大米" bindtap="onHotTap">五常大米</view>
+      <view class="hot" data-kw="苹果" bindtap="onHotTap">阿克苏苹果</view>
+      <view class="hot" data-kw="助残" bindtap="onHotTap">助残优选</view>
+      <view class="hot" data-kw="家清" bindtap="onHotTap">家清组合</view>
+      <view class="hot" data-kw="礼盒" bindtap="onHotTap">杂粮礼盒</view>
+    </view>
+  </view>
+
+  <view class="products" wx:if="{{products.length}}">
+    <product-card
+      wx:for="{{products}}"
+      wx:key="id"
+      product="{{item}}"
+      bind:add="onAddToCart"
+    />
+  </view>
+
+  <view wx:if="{{searched && !products.length && !loading}}" class="empty">
+    <text class="icon">🔍</text>没有找到相关商品，换个关键词试试
+  </view>
+</view>

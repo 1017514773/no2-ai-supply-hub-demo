@@ -1,0 +1,130 @@
+.page {
+  padding: 20rpx 28rpx 200rpx;
+}
+.item {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  padding: 24rpx;
+  position: relative;
+}
+.check {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  border: 2rpx solid var(--line);
+  display: grid;
+  place-items: center;
+  font-size: 26rpx;
+  color: #fff;
+  flex-shrink: 0;
+}
+.check.on {
+  background: var(--green);
+  border-color: var(--green);
+}
+.visual {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 22rpx;
+  display: grid;
+  place-items: center;
+  background: #ece8d8;
+  flex-shrink: 0;
+}
+.visual.orange {
+  background: #f3d8c9;
+}
+.visual.green {
+  background: #d9e4d8;
+}
+.visual .emoji {
+  font-size: 68rpx;
+}
+.info {
+  flex: 1;
+  min-width: 0;
+}
+.name {
+  font-size: 28rpx;
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.spec {
+  color: var(--muted);
+  font-size: 22rpx;
+  margin-top: 4rpx;
+}
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14rpx;
+}
+.price {
+  color: var(--orange);
+  font-weight: 800;
+}
+.price .sym {
+  font-size: 22rpx;
+}
+.price .num {
+  font-size: 32rpx;
+}
+.del {
+  position: absolute;
+  right: 18rpx;
+  top: 14rpx;
+  color: #b3ada0;
+  font-size: 26rpx;
+  padding: 8rpx;
+}
+.footer-bar .all {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  font-size: 24rpx;
+  color: var(--muted);
+}
+.footer-bar .total {
+  flex: 1;
+  text-align: right;
+  margin-right: 16rpx;
+}
+.footer-bar .cta {
+  width: 36%;
+}
+/* 空状态购物车图形：纯 CSS 绘制，替代 emoji */
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16rpx;
+  width: 104rpx;
+  height: 96rpx;
+  color: #c8c5ba;
+}
+.empty-cart .handle {
+  width: 36rpx;
+  height: 20rpx;
+  border: 8rpx solid currentColor;
+  border-bottom: none;
+  border-radius: 18rpx 18rpx 0 0;
+  box-sizing: border-box;
+}
+.empty-cart .body {
+  margin-top: 4rpx;
+  width: 68rpx;
+  height: 50rpx;
+  border: 8rpx solid currentColor;
+  border-radius: 16rpx;
+  box-sizing: border-box;
+}
+.empty-btn {
+  margin-top: 30rpx;
+  width: 240rpx;
+  display: inline-block;
+}

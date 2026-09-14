@@ -1,0 +1,48 @@
+<view class="page">
+  <view class="card">
+    <view class="field">
+      <text class="f-label">收货人</text>
+      <input class="f-input" value="{{name}}" placeholder="姓名" bindinput="onName" aria-label="收货人姓名" />
+    </view>
+    <view class="field">
+      <text class="f-label">手机号</text>
+      <input class="f-input" type="number" maxlength="11" value="{{phone}}" placeholder="11 位手机号" bindinput="onPhone" aria-label="手机号" />
+    </view>
+    <picker mode="region" value="{{regionArray}}" bindchange="onRegion">
+      <view class="field">
+        <text class="f-label">所在地区</text>
+        <text class="f-input {{region ? '' : 'placeholder'}}">{{region || '请选择省 / 市 / 区'}}</text>
+        <text class="chev">›</text>
+      </view>
+    </picker>
+    <view class="field">
+      <text class="f-label">详细地址</text>
+      <input class="f-input" value="{{detail}}" placeholder="街道、门牌号、楼层等" bindinput="onDetail" aria-label="详细地址" />
+    </view>
+    <view class="field">
+      <text class="f-label">标签</text>
+      <view class="tags">
+        <view
+          wx:for="{{tagOptions}}"
+          wx:key="*this"
+          class="tag-chip {{tag === item ? 'on' : ''}}"
+          data-tag="{{item}}"
+          bindtap="onTag"
+          aria-label="标签 {{item}}"
+        >{{item}}</view>
+      </view>
+    </view>
+    <view class="field">
+      <text class="f-label">设为默认</text>
+      <switch checked="{{isDefault}}" color="#155c45" bindchange="onDefault" aria-label="设为默认地址" />
+    </view>
+  </view>
+
+  <view class="muted">代发订单默认使用「默认地址」；自提 / 寄存订单无需地址。</view>
+
+  <view class="footer-bar">
+    <button class="cta {{submitting ? 'disabled' : ''}}" bindtap="onSubmit" aria-label="保存地址">
+      {{submitting ? '保存中…' : (editing ? '保存修改' : '保存地址')}}
+    </button>
+  </view>
+</view>

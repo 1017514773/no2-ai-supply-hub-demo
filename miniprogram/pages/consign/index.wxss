@@ -1,0 +1,71 @@
+.page {
+  padding: 20rpx 28rpx 80rpx;
+}
+
+/* 汇总卡 */
+.summary {
+  background: linear-gradient(135deg, #155c45, #1d7357);
+  color: #fff;
+  border: none;
+}
+.s-row {
+  display: flex;
+  gap: 40rpx;
+}
+.s-num {
+  font-size: 56rpx;
+  font-weight: 900;
+  line-height: 1.2;
+}
+.s-label {
+  font-size: 23rpx;
+  opacity: 0.85;
+}
+.s-warehouse {
+  margin-top: 22rpx;
+  font-size: 25rpx;
+  font-weight: 700;
+}
+.summary .muted {
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 10rpx;
+}
+
+/* 批次卡 */
+.lot {
+  padding: 26rpx;
+}
+.l-head {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 1rpx dashed var(--line);
+  margin-bottom: 6rpx;
+}
+.l-emoji {
+  font-size: 52rpx;
+  width: 100rpx;
+}
+.l-info {
+  flex: 1;
+  min-width: 0;
+}
+.l-name {
+  font-size: 28rpx;
+  font-weight: 800;
+}
+.l-spec {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-top: 6rpx;
+}
+.apply-btn {
+  margin-top: 20rpx;
+}
+.stock-link {
+  margin-top: 18rpx;
+  background: rgba(255, 255, 255, 0.14);
+  border: 2rpx solid rgba(255, 255, 255, 0.55);
+  color: #fff;
+}

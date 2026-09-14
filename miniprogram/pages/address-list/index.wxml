@@ -1,0 +1,31 @@
+<view class="page">
+  <view
+    class="card addr {{selecting ? 'pickable' : ''}}"
+    wx:for="{{list}}"
+    wx:key="id"
+    data-id="{{item.id}}"
+    bindtap="onPick"
+    aria-label="{{selecting ? '选择地址' : '编辑地址'}} {{item.name}}"
+  >
+    <view class="a-head">
+      <text class="a-name">{{item.name}}</text>
+      <text class="a-phone">{{item.phone}}</text>
+      <text wx:if="{{item.isDefault}}" class="pill ok">默认</text>
+      <text wx:if="{{item.tag}}" class="pill">{{item.tag}}</text>
+    </view>
+    <view class="a-detail">{{item.region}} {{item.detail}}</view>
+    <view class="a-ops">
+      <text wx:if="{{!item.isDefault}}" class="op" data-id="{{item.id}}" catchtap="onSetDefault" aria-label="设为默认">设为默认</text>
+      <text class="op" data-id="{{item.id}}" catchtap="onEdit" aria-label="编辑地址">编辑</text>
+      <text class="op warn" data-id="{{item.id}}" catchtap="onRemove" aria-label="删除地址">删除</text>
+    </view>
+  </view>
+
+  <view wx:if="{{!loading && !list.length}}" class="empty">
+    <text class="icon">⌂</text>还没有收货地址
+  </view>
+
+  <view class="footer-bar">
+    <button class="cta" bindtap="onAdd" aria-label="新增收货地址">＋ 新增收货地址</button>
+  </view>
+</view>

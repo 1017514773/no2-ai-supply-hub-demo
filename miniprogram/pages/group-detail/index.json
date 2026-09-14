@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "团购详情",
+  "usingComponents": {
+    "countdown": "/components/countdown/index",
+    "pay-sheet": "/components/pay-sheet/index"
+  }
+}

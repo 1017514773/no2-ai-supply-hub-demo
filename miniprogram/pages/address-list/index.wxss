@@ -1,0 +1,46 @@
+.page {
+  padding: 20rpx 28rpx 160rpx;
+}
+
+.addr {
+  padding: 26rpx;
+}
+.addr.pickable {
+  cursor: pointer;
+}
+.a-head {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  flex-wrap: wrap;
+}
+.a-name {
+  font-size: 30rpx;
+  font-weight: 800;
+}
+.a-phone {
+  color: var(--muted);
+  font-size: 25rpx;
+}
+.a-detail {
+  font-size: 25rpx;
+  color: #4a4a44;
+  line-height: 1.6;
+  margin-top: 12rpx;
+}
+.a-ops {
+  display: flex;
+  justify-content: flex-end;
+  gap: 30rpx;
+  margin-top: 18rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx dashed var(--line);
+}
+.op {
+  font-size: 24rpx;
+  color: var(--green);
+  font-weight: 600;
+}
+.op.warn {
+  color: var(--orange);
+}

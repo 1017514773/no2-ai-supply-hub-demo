@@ -1,0 +1,3 @@
+<view class="countdown {{size}} {{over ? 'over' : ''}}" aria-label="{{over ? '已截团' : '距截团 ' + text}}">
+  <text class="num">{{text}}</text>
+</view>

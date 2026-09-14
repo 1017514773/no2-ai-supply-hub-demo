@@ -1,0 +1,130 @@
+<wxs src="../../utils/format.wxs" module="fmt" />
+<view class="page">
+  <block wx:if="{{group}}">
+    <view class="card hero">
+      <view class="h-top">
+        <view class="h-emoji {{group.product.visual}}"><text class="emoji">{{group.product.emoji}}</text></view>
+        <view class="h-info">
+          <view class="h-title">{{group.title}}</view>
+          <view class="h-spec">{{group.product.spec}} · {{group.note}}</view>
+          <view class="h-price">
+            <text class="sym">¥</text><text class="num">{{group.priceText}}</text>
+            <text wx:if="{{group.originText}}" class="origin">¥{{group.originText}}</text>
+          </view>
+        </view>
+        <text class="pill {{group.pill}}">{{group.statusLabel}}</text>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">成团进度</view>
+      <view class="progress"><view class="bar" style="width: {{group.progressPct}}%"></view></view>
+      <view class="p-row">
+        <text>已参团 <text class="strong">{{group.joinedText}}</text> 件</text>
+        <text class="muted">目标 {{group.targetCount}} 件</text>
+      </view>
+      <block wx:if="{{group.isOpen}}">
+        <view class="cd-row">
+          <text class="muted">距截团</text>
+          <countdown endAt="{{group.endAt}}" size="lg" bind:end="onEnd" />
+        </view>
+      </block>
+      <view wx:else class="cd-row">
+        <text class="muted">{{group.startText}} 开团 · {{group.endText}} 截止</text>
+      </view>
+      <view class="row"><text class="label">团长</text><text>{{group.leaderName}}</text></view>
+      <view class="row"><text class="label">可参团库存</text><text>{{group.stock}} 件</text></view>
+    </view>
+
+    <view class="card" wx:if="{{group.stats}}">
+      <view class="card-title">
+        团购统计
+        <text class="muted">本团订单独立统计</text>
+      </view>
+      <view class="stats">
+        <view class="st-item">
+          <view class="st-num">{{group.stats.validCount}}</view>
+          <view class="st-label">有效订单（单）</view>
+        </view>
+        <view class="st-item">
+          <view class="st-num">{{group.stats.validQty}}</view>
+          <view class="st-label">计入件数（件）</view>
+        </view>
+        <view class="st-item">
+          <view class="st-num">¥{{fmt.yuan(group.stats.validAmountFen)}}</view>
+          <view class="st-label">有效金额</view>
+        </view>
+      </view>
+      <view class="muted">已支付 {{group.stats.orderCount}} 单，退款剔除 {{group.stats.refundCount}} 单；与订单、佣金口径同源。</view>
+      <button class="cta alt mt18" bindtap="onPoster" aria-label="生成团购海报">生成团购海报</button>
+      <view class="muted">海报含团进度与参团入口，可保存到相册发群；正式版将生成带小程序码的分享图。</view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">参团信息</view>
+      <view class="row">
+        <text class="label">购买数量</text>
+        <view class="stepper">
+          <view class="op {{qty <= 1 ? 'disabled' : ''}}" bindtap="onMinus" aria-label="减少数量">−</view>
+          <view class="qty">{{qty}}</view>
+          <view class="op" bindtap="onPlus" aria-label="增加数量">+</view>
+        </view>
+      </view>
+
+      <view class="sub-title">履约方式</view>
+      <view
+        wx:for="{{fulfillments}}"
+        wx:key="key"
+        class="opt {{fulfillment === item.key ? 'on' : ''}}"
+        data-key="{{item.key}}"
+        bindtap="onFulfillment"
+        aria-label="选择履约方式 {{item.label}}"
+      >
+        <view class="opt-radio">{{fulfillment === item.key ? '●' : '○'}}</view>
+        <view class="opt-body">
+          <view class="opt-label">{{item.label}}</view>
+          <view class="opt-desc">{{item.desc}}</view>
+        </view>
+      </view>
+
+      <view class="sub-title">备注</view>
+      <input class="remark" value="{{remark}}" placeholder="选填：给团长或仓库的备注" bindinput="onRemark" aria-label="参团备注" />
+      <view class="muted">平台代发将使用账号默认收货地址；提交后生成待付款订单，支付成功即计入本团人数。</view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">团购规则</view>
+      <view class="rule" wx:for="{{group.rules}}" wx:key="*this">· {{item}}</view>
+      <view class="muted">截团时间到后：达到目标件数即「已成团」，按订单顺序履约；未达成则「未成团」，已支付订单原路退款。</view>
+    </view>
+
+    <view class="disclaimer">团购人数、价格、佣金以实际结算为准，不构成收益承诺。</view>
+
+    <view class="footer-bar">
+      <view class="total">
+        商品金额
+        <text class="price-num">¥{{fmt.yuan(totalFen)}}</text>
+        <view class="muted">运费以订单确认为准</view>
+      </view>
+      <button class="cta {{group.isOpen ? '' : 'disabled'}}" bindtap="onJoin" aria-label="立即参团">
+        {{group.isOpen ? (submitting ? '提交中…' : '立即参团') : '团购已结束'}}
+      </button>
+    </view>
+  </block>
+
+  <view class="poster-mask" wx:if="{{showPoster}}" catchtap="onPosterClose">
+    <view class="poster-box" catchtap="noop">
+      <image wx:if="{{posterPath}}" class="poster-img" src="{{posterPath}}" mode="widthFix" />
+      <view wx:else class="poster-loading">海报生成中…</view>
+      <view class="poster-actions">
+        <button class="cta alt" bindtap="onSavePoster" aria-label="保存海报到相册">
+          {{savingPoster ? '保存中…' : '保存到相册'}}
+        </button>
+        <button class="cta ghost" bindtap="onPosterClose" aria-label="关闭海报">关闭</button>
+      </view>
+    </view>
+  </view>
+  <canvas type="2d" id="posterCanvas" class="poster-canvas"></canvas>
+
+  <pay-sheet show="{{showPay}}" order="{{createdOrder}}" bind:success="onPaySuccess" bind:close="onPayClose" />
+</view>

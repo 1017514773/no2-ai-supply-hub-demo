@@ -1,0 +1,88 @@
+<view class="page">
+  <view class="card head">
+    <view class="head-title">供应商协同</view>
+    <view class="head-sub">{{summary ? summary.partnerCount : 0}} 个协同伙伴 · 在供 SKU {{summary ? summary.skuCount : 0}} · 待对账 {{summary ? summary.pendingCount : 0}}</view>
+    <view class="muted">供货单、对账与结算状态同源；对账确认为后台操作，记录操作人并进入结算流程。</view>
+  </view>
+
+  <view class="card" wx:if="{{summary}}">
+    <view class="grid3">
+      <view class="stat">
+        <view class="num">{{summary.supplierCount}}</view>
+        <view class="lb">供应商</view>
+      </view>
+      <view class="stat">
+        <view class="num">{{summary.brandCount}}</view>
+        <view class="lb">品牌方</view>
+      </view>
+      <view class="stat">
+        <view class="num amt">{{summary.monthAmountText}}</view>
+        <view class="lb">本月供货金额</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">协同伙伴<text class="muted">点击展开对账单</text></view>
+
+    <view class="pt {{expandedId === item.id ? 'open' : ''}}" wx:for="{{list}}" wx:key="id">
+      <view class="pt-head" data-id="{{item.id}}" bindtap="onToggle" aria-label="展开 {{item.name}} 的对账单">
+        <view class="pt-ava">{{item.emoji}}</view>
+        <view class="grow">
+          <view class="pt-name-row">
+            <text class="pt-name ellipsis">{{item.name}}</text>
+            <text class="pill">{{item.typeLabel}}</text>
+          </view>
+          <view class="pt-meta ellipsis">{{item.category}} · {{item.base}} · 联络 {{item.contact}}</view>
+          <view class="pt-meta">{{item.skuCount}} 个在供 SKU · 本期 {{item.orderCount}} 单 · {{item.period}}</view>
+        </view>
+        <view class="pt-right">
+          <text class="pill {{item.pill}}">{{item.statusLabel}}</text>
+          <view class="pt-amount">{{item.monthAmountText}}</view>
+          <view class="pt-toggle">{{expandedId === item.id ? '收起' : '对账单'}}</view>
+        </view>
+      </view>
+
+      <block wx:if="{{expandedId === item.id}}">
+        <block wx:if="{{detail}}">
+          <view class="sub-title">本期供货明细</view>
+          <view class="it" wx:for="{{detail.items}}" wx:for-item="it" wx:key="id">
+            <view class="grow">
+              <view class="it-name ellipsis">{{it.name}}</view>
+              <view class="it-spec">{{it.spec}} · {{it.qty}} × {{it.unitPriceText}}</view>
+            </view>
+            <text class="it-amount">{{it.amountText}}</text>
+          </view>
+
+          <view class="sub-title">对账与结算记录</view>
+          <view class="rc" wx:for="{{detail.records}}" wx:for-item="rc" wx:key="id">
+            <view class="rc-action">{{rc.action}}</view>
+            <view class="rc-meta">{{rc.operator}} · {{rc.atText}}</view>
+          </view>
+
+          <view class="ops-panel" wx:if="{{detail.partner.canConfirm}}">
+            <view class="t">后台操作 · 代替协同侧确认对账</view>
+            <button
+              class="cta {{confirming ? 'disabled' : ''}}"
+              data-id="{{item.id}}"
+              bindtap="onConfirm"
+              aria-label="确认本期对账"
+            >
+              {{confirming ? '确认中…' : '确认对账'}}
+            </button>
+          </view>
+          <view class="muted mt10" wx:if="{{detail.partner.reconciledText}}">
+            对账确认于 {{detail.partner.reconciledText}}
+            <text wx:if="{{detail.partner.settledText}}"> · 结算于 {{detail.partner.settledText}}</text>
+            <text wx:else> · 待结算</text>
+          </view>
+        </block>
+        <view class="muted" wx:else>加载中…</view>
+      </block>
+    </view>
+
+    <view wx:if="{{!loading && !list.length}}" class="muted">暂无协同伙伴</view>
+  </view>
+
+  <view class="disclaimer">正式版为供应商 / 品牌方提供独立门户登录，自助查看对账单并确认；店主侧保留代确认入口，覆盖线下协同场景。</view>
+</view>

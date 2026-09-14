@@ -1,0 +1,122 @@
+<view class="page">
+  <view class="card head">
+    <view class="head-title">企微客服</view>
+    <view class="head-sub">待回复 {{pendingCount}} · 社群 {{groupSummary ? groupSummary.groupCount : 0}} 个 · 成员 {{groupSummary ? groupSummary.memberTotal : 0}}</view>
+    <view class="muted">会话与社群数据与服务号同步；回复草稿由 AI 生成，人工确认后通过企微渠道发送。</view>
+  </view>
+
+  <view class="tabs">
+    <view
+      class="tab {{tab === item.key ? 'on' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="key"
+      data-key="{{item.key}}"
+      bindtap="onTab"
+    >
+      {{item.label}}
+    </view>
+  </view>
+
+  <block wx:if="{{tab === 'chat'}}">
+    <block wx:if="{{!current}}">
+      <view class="card">
+        <view class="card-title">客户会话<text class="muted">待回复优先</text></view>
+        <view
+          class="cv"
+          wx:for="{{convs}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="openConv"
+          aria-label="打开与 {{item.name}} 的会话"
+        >
+          <view class="cv-ava">{{item.emoji}}</view>
+          <view class="cv-main">
+            <view class="cv-top">
+              <text class="cv-name">{{item.name}}</text>
+              <text class="pill">{{item.tag}}</text>
+            </view>
+            <view class="cv-last">{{item.lastText}}</view>
+            <view class="cv-meta">{{item.sceneLabel}} · {{item.lastAtText}}</view>
+          </view>
+          <text class="pill {{item.pill}}">{{item.statusLabel}}</text>
+        </view>
+        <view wx:if="{{!loading && !convs.length}}" class="muted">暂无会话</view>
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="card">
+        <view class="card-title">
+          <text>{{current.name}} · {{current.sceneLabel}}</text>
+          <text class="link" bindtap="closeConv">返回列表</text>
+        </view>
+        <view class="msg {{item.mine ? 'mine' : ''}}" wx:for="{{current.messages}}" wx:key="id">
+          <view class="bubble">{{item.text}}</view>
+          <view class="msg-time">{{item.atText}}</view>
+        </view>
+        <view class="ops-panel">
+          <view class="t">后台操作 · 代替企微侧发送</view>
+          <button class="cta ghost" bindtap="onDraft" aria-label="AI 生成回复草稿">
+            {{drafting ? '生成中…' : 'AI 生成回复草稿'}}
+          </button>
+        </view>
+        <view
+          class="draft"
+          wx:for="{{drafts}}"
+          wx:key="*this"
+          data-idx="{{index}}"
+          bindtap="onUseDraft"
+          aria-label="使用草稿 {{index + 1}}"
+        >
+          <view class="draft-tag">草稿 {{index + 1}} · 点击填入编辑</view>
+          <view class="draft-text">{{item}}</view>
+        </view>
+      </view>
+
+      <view class="card">
+        <view class="card-title">回复内容<text class="muted">人工确认后发送</text></view>
+        <textarea
+          class="reply"
+          value="{{replyText}}"
+          bindinput="onReplyInput"
+          maxlength="500"
+          auto-height
+          placeholder="输入回复内容，或先点上方「AI 生成回复草稿」"
+        />
+        <button
+          class="cta mt18 {{replyText ? '' : 'disabled'}}"
+          bindtap="onSend"
+          aria-label="确认发送回复"
+        >
+          {{sending ? '发送中…' : '确认发送回复'}}
+        </button>
+      </view>
+    </block>
+  </block>
+
+  <block wx:else>
+    <view class="card">
+      <view class="card-title">社群列表<text class="muted">今日消息 {{groupSummary ? groupSummary.todayMsgs : 0}}</text></view>
+      <view class="gp" wx:for="{{groups}}" wx:key="id">
+        <view class="gp-top">
+          <text class="gp-name">{{item.name}}</text>
+          <text class="pill {{item.groupPill}}">{{item.groupStatusLabel}}</text>
+        </view>
+        <view class="gp-meta">成员 {{item.memberCount}} · 今日消息 {{item.todayMsgs}} · 关联团购「{{item.groupTitle}}」（{{item.joinText}}）</view>
+        <view class="gp-last" wx:if="{{item.lastBroadcastText}}">最近群发（{{item.lastBroadcastAtText}}）：{{item.lastBroadcastText}}</view>
+        <view class="gp-actions">
+          <block wx:if="{{item.groupPill === 'ok'}}">
+            <button class="cta small ghost" data-id="{{item.id}}" data-type="PROGRESS" data-label="进度晒单" bindtap="onBroadcast">进度晒单</button>
+            <button class="cta small ghost" data-id="{{item.id}}" data-type="THANKS" data-label="成团致谢" bindtap="onBroadcast">成团致谢</button>
+          </block>
+          <block wx:else>
+            <button class="cta small ghost" data-id="{{item.id}}" data-type="PROGRESS" data-label="进度提醒" bindtap="onBroadcast">进度提醒</button>
+            <button class="cta small ghost" data-id="{{item.id}}" data-type="COUNTDOWN" data-label="截团提醒" bindtap="onBroadcast">截团提醒</button>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <view class="disclaimer">群发为运营辅助动作：正式版对接企业微信群机器人接口，文案与频次需人工确认后发送。</view>
+  </block>
+</view>

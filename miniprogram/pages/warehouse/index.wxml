@@ -1,0 +1,78 @@
+<view class="page">
+  <view class="card head" wx:if="{{summary}}">
+    <view class="head-title">多仓网络</view>
+    <view class="head-sub">覆盖 {{totalCities}} 城 · {{summary.warehouseCount}} 个在营仓 · 库存合计 {{summary.stockQty}} 件</view>
+    <view class="grid3 stats">
+      <view class="stat">
+        <view class="num">{{summary.skuCount}}</view>
+        <view class="lb">在库 SKU</view>
+      </view>
+      <view class="stat">
+        <view class="num">{{summary.lotCount}}</view>
+        <view class="lb">寄存批次</view>
+      </view>
+      <view class="stat">
+        <view class="num">{{summary.warehouseCount}}</view>
+        <view class="lb">在营仓库</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">仓库列表<text class="muted">点击卡片切换默认仓</text></view>
+    <view
+      class="wh {{item.isDefault ? 'on' : ''}}"
+      wx:for="{{list}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onSwitch"
+      aria-label="查看或切换 {{item.name}}"
+    >
+      <view class="wh-top">
+        <view class="wh-name-row">
+          <text class="wh-name">{{item.name}}</text>
+          <text class="pill {{item.rolePill}}">{{item.roleLabel}}</text>
+        </view>
+        <text class="wh-default" wx:if="{{item.isDefault}}">默认仓</text>
+        <text class="wh-switching" wx:elif="{{switching === item.id}}">切换中…</text>
+      </view>
+      <view class="wh-meta">{{item.city}}{{item.region}} · {{item.address}}</view>
+      <view class="wh-meta">{{item.hours}} · {{item.openText}}</view>
+      <view class="wh-stats">在库 {{item.skuCount}} SKU · 库存 {{item.stockQty}} 件 · 寄存 {{item.lotCount}} 批</view>
+    </view>
+    <view class="muted">切换后，新订单的自提点与寄存批次默认归属该仓；历史订单与批次记录保持不变。</view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">城市覆盖</view>
+    <view class="city-row" wx:for="{{cities}}" wx:key="city">
+      <text class="city-name">{{item.city}}</text>
+      <text class="city-names">{{item.names}}</text>
+    </view>
+    <view class="muted">样板仓网络已覆盖 {{cities.length}} 城；平台服务覆盖 {{totalCities}} 城社区团购网络（正式版按城市开通更多仓配节点）。</view>
+  </view>
+
+  <view class="card" wx:if="{{org}}">
+    <view class="card-title">组织与权限<text class="muted">当前账号：{{org.account}}</text></view>
+    <view
+      class="role {{openRole === item.key ? 'open' : ''}}"
+      wx:for="{{org.roles}}"
+      wx:key="key"
+      data-key="{{item.key}}"
+      bindtap="onRole"
+      aria-label="查看 {{item.name}} 角色权限"
+    >
+      <view class="role-top">
+        <text class="role-name">{{item.name}}</text>
+        <text class="pill {{item.current ? 'ok' : 'gray'}}">{{item.current ? '当前角色' : '可分配'}}</text>
+      </view>
+      <view class="role-desc">{{item.desc}}</view>
+      <view class="role-mods" wx:if="{{openRole === item.key}}">
+        <text class="pill role-mod" wx:for="{{item.modules}}" wx:for-item="m" wx:key="*this">{{m}}</text>
+      </view>
+    </view>
+    <view class="muted">正式版按组织架构分配账号与角色，操作全程留痕（在库存流水、对账中心等页面可复核）。</view>
+  </view>
+
+  <view class="disclaimer">仓库与组织数据实时聚合自商品、寄存批次与操作记录；正式版支持多城市、多仓的独立库存与履约策略。</view>
+</view>

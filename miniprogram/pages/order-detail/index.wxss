@@ -1,0 +1,234 @@
+.page {
+  padding: 20rpx 28rpx 80rpx;
+}
+
+/* 顶部状态卡 */
+.hero {
+  background: linear-gradient(135deg, #155c45, #1d7357);
+  border-radius: 22rpx;
+  padding: 30rpx 30rpx 26rpx;
+  color: #fff;
+  margin-bottom: 22rpx;
+}
+.hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+.hero-no {
+  font-size: 23rpx;
+  opacity: 0.85;
+}
+.hero-desc {
+  margin-top: 16rpx;
+  font-size: 25rpx;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+.hero-tags {
+  display: flex;
+  gap: 14rpx;
+  margin-top: 20rpx;
+  flex-wrap: wrap;
+}
+.tag {
+  font-size: 22rpx;
+  padding: 6rpx 18rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+.tag.ok {
+  background: #dfe94f;
+  color: #155c45;
+  font-weight: 700;
+}
+.tag.off {
+  background: #e86832;
+  font-weight: 700;
+}
+
+/* 自提核销码 */
+.code-box {
+  text-align: center;
+  padding: 26rpx 0 30rpx;
+  border-bottom: 1rpx dashed var(--line);
+  margin-bottom: 20rpx;
+}
+.code-num {
+  font-size: 84rpx;
+  font-weight: 800;
+  letter-spacing: 18rpx;
+  color: var(--green);
+  font-family: monospace;
+}
+.code-tip {
+  color: var(--muted);
+  font-size: 23rpx;
+  margin-top: 10rpx;
+}
+
+/* 四组状态 */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+.g-item {
+  width: 50%;
+  box-sizing: border-box;
+  padding: 14rpx 8rpx;
+}
+.g-label {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-bottom: 6rpx;
+}
+.g-value {
+  font-size: 26rpx;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+/* 商品清单 */
+.item {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  padding: 18rpx 0;
+  border-bottom: 1rpx dashed var(--line);
+}
+.item:last-child {
+  border-bottom: none;
+  padding-bottom: 4rpx;
+}
+.i-emoji {
+  font-size: 50rpx;
+  width: 110rpx;
+}
+.i-body {
+  flex: 1;
+  min-width: 0;
+}
+.i-name {
+  font-size: 27rpx;
+  font-weight: 700;
+}
+.i-spec {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-top: 6rpx;
+}
+.i-right {
+  text-align: right;
+}
+.i-price {
+  font-size: 26rpx;
+  font-weight: 700;
+}
+.i-qty {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-top: 6rpx;
+}
+
+/* 金额 */
+.total-row {
+  border-top: 1rpx dashed var(--line);
+  margin-top: 8rpx;
+  padding-top: 20rpx;
+}
+.amount {
+  font-size: 36rpx;
+  font-weight: 800;
+  color: var(--orange);
+}
+.refund {
+  color: var(--orange);
+  font-weight: 700;
+}
+
+/* 佣金明细 */
+.cm {
+  border: 1rpx solid var(--line);
+  border-radius: 16rpx;
+  padding: 20rpx 22rpx;
+  margin-bottom: 16rpx;
+}
+.cm-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cm-type {
+  font-size: 26rpx;
+  font-weight: 700;
+}
+.cm-amount {
+  font-size: 28rpx;
+  font-weight: 800;
+  color: var(--green);
+}
+.cm-amount.neg {
+  color: var(--orange);
+}
+.cm-meta {
+  font-size: 22rpx;
+  color: var(--muted);
+  margin-top: 8rpx;
+}
+.cm-explain {
+  font-size: 23rpx;
+  color: #4a4a44;
+  background: #f4f0e4;
+  border-radius: 12rpx;
+  padding: 14rpx 16rpx;
+  margin-top: 12rpx;
+  line-height: 1.55;
+}
+
+/* 时间线 */
+.tl {
+  display: flex;
+  gap: 18rpx;
+  padding: 10rpx 0;
+  position: relative;
+}
+.tl-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  background: var(--green);
+  margin-top: 10rpx;
+  flex-shrink: 0;
+}
+.tl-body {
+  flex: 1;
+  padding-bottom: 16rpx;
+  border-bottom: 1rpx dashed var(--line);
+}
+.tl:last-child .tl-body {
+  border-bottom: none;
+}
+.tl-text {
+  font-size: 25rpx;
+  line-height: 1.55;
+}
+.tl-time {
+  font-size: 21rpx;
+  color: var(--muted);
+  margin-top: 6rpx;
+}
+
+/* 后台操作 */
+.ops {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  padding: 8rpx 0 4rpx;
+}
+
+.link {
+  color: var(--green);
+  font-weight: 600;
+}
