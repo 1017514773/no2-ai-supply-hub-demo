@@ -88,7 +88,14 @@
       </view>
 
       <view class="sub-title">备注</view>
-      <input class="remark" value="{{remark}}" placeholder="选填：给团长或仓库的备注" bindinput="onRemark" aria-label="参团备注" />
+      <input
+        class="remark"
+        value="{{remark}}"
+        placeholder="选填：给团长或仓库的备注"
+        bindinput="onRemark"
+        always-embed="{{true}}"
+        aria-label="参团备注"
+      />
       <view class="muted">平台代发将使用账号默认收货地址；提交后生成待付款订单，支付成功即计入本团人数。</view>
     </view>
 

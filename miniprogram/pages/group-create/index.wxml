@@ -51,7 +51,14 @@
     </view>
 
     <view class="card-title mt">开团备注</view>
-    <input class="note" value="{{note}}" placeholder="选填：产地、发货时效等说明" bindinput="onNote" aria-label="开团备注" />
+    <input
+      class="note"
+      value="{{note}}"
+      placeholder="选填：产地、发货时效等说明"
+      bindinput="onNote"
+      always-embed="{{true}}"
+      aria-label="开团备注"
+    />
   </view>
 
   <view class="card">

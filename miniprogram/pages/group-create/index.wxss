@@ -93,10 +93,13 @@
   margin-top: 30rpx;
 }
 
+/* 备注框：行高与内容区（88rpx 高 - 上下 1rpx 边框）等高，聚焦时文字不跳动 */
 .note {
   border: 1rpx solid var(--line);
   border-radius: 14rpx;
-  padding: 18rpx;
+  padding: 0 20rpx;
+  height: 88rpx;
+  line-height: 86rpx;
   font-size: 26rpx;
   background: #fbf8ef;
 }

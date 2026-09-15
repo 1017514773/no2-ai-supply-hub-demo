@@ -83,7 +83,14 @@
 
   <view class="card">
     <view class="card-title">订单备注</view>
-    <input class="remark" placeholder="选填：给仓库的备注" value="{{remark}}" bindinput="onRemark" aria-label="订单备注" />
+    <input
+      class="remark"
+      placeholder="选填：给仓库的备注"
+      value="{{remark}}"
+      bindinput="onRemark"
+      always-embed="{{true}}"
+      aria-label="订单备注"
+    />
   </view>
 
   <view class="disclaimer">金额、佣金以实际结算为准，不构成收益承诺。</view>

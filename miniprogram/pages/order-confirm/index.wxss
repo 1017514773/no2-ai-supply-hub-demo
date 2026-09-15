@@ -117,10 +117,13 @@
   color: var(--muted);
   font-size: 22rpx;
 }
+/* 备注框：无边框，行高与高度等高，聚焦时文字不跳动 */
 .remark {
   background: #f4f1e6;
   border-radius: 14rpx;
-  padding: 20rpx;
+  padding: 0 20rpx;
+  height: 88rpx;
+  line-height: 88rpx;
   font-size: 25rpx;
 }
 .footer-bar .cta {
