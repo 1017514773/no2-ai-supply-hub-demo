@@ -8,7 +8,7 @@ function commission(id, type, baseFen, rate, amountFen, status, createdAt, extra
       id, type, baseFen, rate, amountFen, status,
       orderId: '', orderNo: '', customerName: '',
       createdAt, settledAt: 0,
-      explain: '按 commission_base ¥' + (baseFen / 100) + ' x ' + (rate * 100).toFixed(2) + '% 试算（口径以批次复核为准）'
+      explain: '按订单实付金额计算推广奖励费（口径以复核为准）'
     },
     extra || {}
   );
@@ -143,8 +143,8 @@ module.exports = function buildRecords(products) {
     commission('m_9006', 'REVERSAL', 3990, 0.005, -20, 'REVERSED', now - 5 * DAY, { orderId: 'o_8103', orderNo: 'SH20260908003', explain: '订单 SH20260908003 退款，冲销原预计佣金 ¥0.20' }),
     commission('m_9007', 'DIRECT', 100000, 0.003, 300, 'FROZEN', now - DAY, { orderNo: 'SH20260911902', customerName: '赵*', explain: '资格复核期间暂缓入账，复核通过后转入可结算' }),
     commission('m_9008', 'DIRECT', 200000, 0.003, 600, 'SETTLED', now - 45 * DAY, { orderNo: 'SH20260801455', customerName: '刘*', settledAt: now - 38 * DAY }),
-    commission('m_9009', 'GROUP_DIRECT', 5990, 0.002, 12, 'READY', now - DAY, { orderNo: 'SH20260911931', customerName: '团友*', explain: '团购直推试算：¥59.9 x 0.2% = ¥0.12' }),
-    commission('m_9010', 'GROUP_DIRECT', 7980, 0.002, 16, 'SETTLED', now - 5 * DAY, { orderId: 'o_8104', orderNo: 'SH20260905004', customerName: '团购订单（本人开团）', settledAt: now - 2 * DAY, explain: '团购直推试算：¥79.8 x 0.2% = ¥0.16' })
+    commission('m_9009', 'GROUP_DIRECT', 5990, 0.002, 12, 'READY', now - DAY, { orderNo: 'SH20260911931', customerName: '团友*', explain: '团购推广奖励费：¥0.12（按订单实付金额计算）' }),
+    commission('m_9010', 'GROUP_DIRECT', 7980, 0.002, 16, 'SETTLED', now - 5 * DAY, { orderId: 'o_8104', orderNo: 'SH20260905004', customerName: '团购订单（本人开团）', settledAt: now - 2 * DAY, explain: '团购推广奖励费：¥0.16（按订单实付金额计算）' })
   ];
 
   const inventoryLots = [

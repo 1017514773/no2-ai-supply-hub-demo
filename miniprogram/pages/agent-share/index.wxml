@@ -11,7 +11,7 @@
 
   <view class="card">
     <view class="card-title">分享给好友</view>
-    <view class="muted">转发小程序卡片给微信好友/社群，好友下单按「单层直推」试算计佣。</view>
+    <view class="muted">转发小程序卡片给微信好友/社群，好友下单成功后您可获得推广奖励费（具体金额按订单实付计算）。</view>
     <button class="cta mt18" open-type="share" aria-label="分享给好友">转发给好友 / 社群</button>
     <button class="cta ghost mt18" bindtap="onScanVerify" aria-label="客户扫码验证">客户扫码验证</button>
   </view>
@@ -44,7 +44,7 @@
 
   <view class="card">
     <view class="card-title">推广归属规则</view>
-    <view class="rule">· 客户通过推广码/分享首次下单后绑定归属，直推与间推各按对应比例试算；</view>
+    <view class="rule">· 客户通过推广码/分享首次下单后绑定归属，按推广奖励费规则计发；</view>
     <view class="rule">· 归属变更需人工审批并保留原关系记录（可在资格页审计日志查看）；</view>
     <view class="rule">· 退款订单不计流水与佣金，已记录佣金生成负向冲销流水；</view>
   </view>

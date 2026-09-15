@@ -163,8 +163,8 @@ function makeCommissions(d, order) {
       createdAt: Date.now(),
       settledAt: 0,
       explain:
-        '本人采购试算：¥' + fmt.fenToYuan(base) + ' x ' + rate * 100 + '% = ¥' +
-        fmt.fenToYuan(amount) + '（预计佣金，完成并过售后期后转可结算）'
+        '本人进货推广奖励费：¥' + fmt.fenToYuan(amount) +
+        '（按订单实付金额计算，完成并过售后期后转可结算）'
     });
   }
   if (order.groupId) {
@@ -185,7 +185,7 @@ function makeCommissions(d, order) {
           customerName: '团购订单（本人开团）',
           createdAt: Date.now(),
           settledAt: 0,
-          explain: '团购直推试算：¥' + fmt.fenToYuan(base) + ' x ' + r2 * 100 + '% = ¥' + fmt.fenToYuan(a2)
+          explain: '团购推广奖励费：¥' + fmt.fenToYuan(a2) + '（按订单实付金额计算）'
         });
       }
     }
@@ -608,7 +608,7 @@ module.exports = function (on) {
             customerName: c.customerName,
             createdAt: Date.now(),
             settledAt: 0,
-            explain: '订单 ' + order.orderNo + ' 退款，冲销原' + C.COMMISSION_TYPE_LABEL[c.type] + '佣金 ¥' + fmt.fenToYuan(c.amountFen)
+            explain: '订单 ' + order.orderNo + ' 退款，冲销对应的' + C.COMMISSION_TYPE_LABEL[c.type] + ' ¥' + fmt.fenToYuan(c.amountFen)
           });
         }
       });

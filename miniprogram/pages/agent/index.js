@@ -17,11 +17,10 @@ Page({
     monthPct: 0,
     totals: null,
     weekSumText: '',
-    rates: [
-      { label: '本人采购', rate: '0.5%' },
-      { label: '直推', rate: '0.3%' },
-      { label: '间推', rate: '0.15%' },
-      { label: '团购直推', rate: '0.2%' }
+    rewards: [
+      { label: '本人进货', value: '每日推广奖励费 ¥0.34' },
+      { label: '分享成交', value: '推广奖励费 ¥2.04' },
+      { label: '社群开团成交', value: '团购推广奖励费 ¥0.12' }
     ],
     disclaimer: env.demoDisclaimer,
     loading: true
@@ -68,7 +67,7 @@ Page({
           statusPill: C.agentStatusPill(qual.status),
           bars,
           weekSumText: fmt.fenToYuan(weekSum),
-          team,
+          team: Object.assign({}, team, { customerCount: team.directCount + team.indirectCount }),
           monthPct: Math.min(100, Math.round((team.monthVolumeFen / team.monthTargetFen) * 100)),
           totals: earnings.totals,
           loading: false

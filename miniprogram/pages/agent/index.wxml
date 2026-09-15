@@ -70,9 +70,8 @@
       团队经营（本月）
       <text class="muted">{{team.monthTargetLabel}}</text>
     </view>
-    <view class="grid2">
-      <view class="cell"><view class="cell-num">{{team.directCount}}</view><view class="cell-label">直推客户</view></view>
-      <view class="cell"><view class="cell-num">{{team.indirectCount}}</view><view class="cell-label">间推客户</view></view>
+    <view class="grid3">
+      <view class="cell"><view class="cell-num">{{team.customerCount}}</view><view class="cell-label">推广客户</view></view>
       <view class="cell"><view class="cell-num">{{team.monthOrders}}</view><view class="cell-label">本月订单</view></view>
       <view class="cell"><view class="cell-num">¥{{fmt.yuan(team.monthVolumeFen)}}</view><view class="cell-label">本月成交额</view></view>
     </view>
@@ -108,12 +107,12 @@
   </view>
 
   <view class="card">
-    <view class="card-title">佣金试算参数</view>
-    <view class="flex-between rate-row" wx:for="{{rates}}" wx:key="label">
+    <view class="card-title">推广奖励费</view>
+    <view class="flex-between rate-row" wx:for="{{rewards}}" wx:key="label">
       <text>{{item.label}}</text>
-      <text class="rate">{{item.rate}}</text>
+      <text class="rate">{{item.value}}</text>
     </view>
-    <view class="muted">逐笔可解释：每笔佣金按「商品实付金额 × 对应比例」试算；退款订单生成负向冲销流水；比例需客户书面确认后生效。</view>
+    <view class="muted">以上为真实订单的推广奖励费实例；逐笔可查，退款订单自动冲销，具体规则以正式协议书面确认为准。</view>
   </view>
 
   <view class="disclaimer">{{disclaimer}}</view>

@@ -57,5 +57,5 @@
     <text class="icon">☰</text>暂无相关流水
   </view>
 
-  <view class="disclaimer">逐笔金额按「基数 × 比例」试算并附计算说明，不构成收益承诺。流水冻结 / 解冻为风控后台操作，均写入审计日志。</view>
+  <view class="disclaimer">逐笔金额按订单实付金额计算并附说明，不构成收益承诺。流水冻结 / 解冻为风控后台操作，均写入审计日志。</view>
 </view>

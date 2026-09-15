@@ -58,7 +58,7 @@
     <view class="card-title">开团说明</view>
     <view class="rule">· 开团后生成团购页，可转发社群邀请参团；</view>
     <view class="rule">· 截团时间到达后：达到目标件数即「已成团」，未达成则「未成团」并自动退款；</view>
-    <view class="rule">· 本人开团成交按团购直推试算计佣；</view>
+    <view class="rule">· 本人开团成交可获得团购推广奖励费；</view>
     <view class="rule">· 退款订单不计流水与佣金。</view>
   </view>
 

@@ -66,10 +66,10 @@ const FULFILLMENT_DESC = {
 };
 
 const COMMISSION_TYPE_LABEL = {
-  SELF: '本人采购',
-  DIRECT: '直推',
-  INDIRECT: '间推',
-  GROUP_DIRECT: '团购直推',
+  SELF: '本人进货',
+  DIRECT: '推广奖励费',
+  INDIRECT: '推广奖励费',
+  GROUP_DIRECT: '团购推广奖励费',
   REVERSAL: '退款冲销'
 };
 

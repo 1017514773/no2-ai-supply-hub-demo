@@ -162,7 +162,7 @@ module.exports = function (on) {
     return Object.assign(enrichGroup(d, g), {
       stats: groupStats(d, g),
       rules: [
-        '本人分享成交按单层直推计提（费率需客户书面确认）',
+        '本人分享成交可获得推广奖励费（规则需客户书面确认）',
         '退款订单不计流水与佣金',
         '履约方式：自提 / 仓内寄存 / 平台代发'
       ]
