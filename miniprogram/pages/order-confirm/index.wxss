@@ -10,6 +10,21 @@
   font-size: 24rpx;
   margin-bottom: 20rpx;
 }
+/* 批发订单起订提示：未达标橙色提醒，达标绿色确认 */
+.ws-banner {
+  background: #f8e6dc;
+  border: 1rpx solid #ecc8b4;
+  color: var(--orange);
+  border-radius: 20rpx;
+  padding: 18rpx 24rpx;
+  font-size: 24rpx;
+  margin-bottom: 20rpx;
+}
+.ws-banner.done {
+  background: #eef4ed;
+  border-color: #cfe0cc;
+  color: var(--green);
+}
 .opt {
   display: flex;
   gap: 16rpx;

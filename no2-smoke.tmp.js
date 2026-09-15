@@ -69,9 +69,16 @@ async function expectErr(method, url, data) {
   ok('对账导出随默认仓（昆山）', exp2.csv.indexOf('苏州昆山 对账中心导出') === 0, exp2.csv.slice(0, 30));
 
   console.log('\n[3] 下单自提联动默认仓');
-  const sellable = products.list.find((p) => p.stock > 0) || products.list[0];
+  // 批发起订 ¥1000：选不限购且库存充足的商品，按起订额计算购买数量
+  const minNeed = 100000;
+  const sellable =
+    products.list.find((p) => {
+      const q = Math.max(1, Math.ceil(minNeed / p.priceFen));
+      return p.stock > 0 && !p.limitPerUser && p.stock >= q;
+    }) || products.list.find((p) => p.stock > 0);
+  const buyQty = Math.max(1, Math.ceil(minNeed / sellable.priceFen));
   const prev = await call('POST', '/orders/preview', {
-    items: [{ productId: sellable.id, qty: 1 }],
+    items: [{ productId: sellable.id, qty: buyQty }],
     fulfillment: 'PICKUP'
   });
   ok(
@@ -80,7 +87,7 @@ async function expectErr(method, url, data) {
     prev.pickupPoint
   );
   const ord = await call('POST', '/orders', {
-    items: [{ productId: sellable.id, qty: 1 }],
+    items: [{ productId: sellable.id, qty: buyQty }],
     fulfillment: 'PICKUP'
   });
   const od1 = await call('GET', '/orders/' + ord.id);
@@ -98,6 +105,11 @@ async function expectErr(method, url, data) {
     od2.pickupPoint && od2.pickupPoint.name.indexOf('昆山') >= 0,
     od2.pickupPoint && od2.pickupPoint.name
   );
+  const minErr = await expectErr('POST', '/orders', {
+    items: [{ productId: sellable.id, qty: 1 }],
+    fulfillment: 'PICKUP'
+  });
+  ok('批发订单不足 ¥1000 被拦截', !!minErr && minErr.code === 'MIN_ORDER', minErr && minErr.code);
 
   console.log('\n[4] 企微客服');
   const convs = await call('GET', '/wecom/conversations');

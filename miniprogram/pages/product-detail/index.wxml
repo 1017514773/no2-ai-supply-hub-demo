@@ -14,6 +14,7 @@
     <view class="pname">{{product.name}}</view>
     <view class="pspec">{{product.spec}}</view>
     <view class="meta">
+      <text class="tag-inline ws">批发直供 · 满 ¥1000 起订</text>
       <text>库存 {{product.stock}} {{product.unit}}</text>
       <text>已售 {{product.sales}}</text>
       <text wx:if="{{product.limitPerUser}}" class="tag-inline limit">每账号限购 {{product.limitPerUser}} 件</text>

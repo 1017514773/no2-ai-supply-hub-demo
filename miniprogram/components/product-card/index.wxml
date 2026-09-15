@@ -2,6 +2,7 @@
 <view class="product-card" bindtap="onTap" hover-class="btn-hover" aria-label="{{product.name}} {{product.spec}} 价格{{fmt.money(product.priceFen)}}">
   <view class="visual {{product.visual}}">
     <text wx:if="{{product.tags && product.tags[0]}}" class="tag">{{product.tags[0]}}</text>
+    <text class="ws-tag">批发</text>
     <text class="emoji">{{product.emoji}}</text>
   </view>
   <view class="pbody">

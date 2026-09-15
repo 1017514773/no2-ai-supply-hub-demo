@@ -210,6 +210,14 @@ function createOrder(payload) {
     throw fail('VALIDATION_ERROR', '履约方式不正确');
   }
   const { view, productAmountFen } = priceItems(d, items);
+  // 批发起订校验：非团购订单商品金额须达起订额（客户口径：批发经营，不做零售散单）
+  if (!groupId && productAmountFen < C.WHOLESALE.MIN_PRODUCT_AMOUNT_FEN) {
+    throw fail(
+      'MIN_ORDER',
+      '批发订单满 ' + C.WHOLESALE.MIN_LABEL + ' 起订，当前商品金额 ¥' + fmt.fenToYuan(productAmountFen) +
+        '，还差 ¥' + fmt.fenToYuan(C.WHOLESALE.MIN_PRODUCT_AMOUNT_FEN - productAmountFen)
+    );
+  }
   const freightFen = freightOf(productAmountFen, fulfillment);
 
   let addressSnapshot = null;

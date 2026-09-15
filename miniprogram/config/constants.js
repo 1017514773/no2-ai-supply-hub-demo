@@ -65,6 +65,12 @@ const FULFILLMENT_DESC = {
   PICKUP: '到仓自提，出示核销码提货'
 };
 
+/** 批发起订规则：非团购订单商品金额不足起订额不可下单（金额单位：分） */
+const WHOLESALE = {
+  MIN_PRODUCT_AMOUNT_FEN: 100000,
+  MIN_LABEL: '¥1000'
+};
+
 const COMMISSION_TYPE_LABEL = {
   SELF: '本人进货',
   DIRECT: '推广奖励费',
@@ -198,6 +204,7 @@ module.exports = {
   FULFILLMENT,
   FULFILLMENT_LABEL,
   FULFILLMENT_DESC,
+  WHOLESALE,
   COMMISSION_TYPE_LABEL,
   COMMISSION_STATUS,
   COMMISSION_STATUS_LABEL,

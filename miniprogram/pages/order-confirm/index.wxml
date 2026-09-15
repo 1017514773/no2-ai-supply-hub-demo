@@ -4,6 +4,11 @@
     🔥 团购订单：支付成功后将自动计入手集团购数量
   </view>
 
+  <view wx:if="{{isWholesale}}" class="ws-banner {{shortFen > 0 ? '' : 'done'}}">
+    <block wx:if="{{shortFen > 0}}">批发订单满 {{minOrderLabel}} 起订，当前还差 ¥{{fmt.yuan(shortFen)}}，请增加数量或搭配选购</block>
+    <block wx:else>已满足批发起订（满 {{minOrderLabel}}）；支付后默认登记仓内寄存，可随时申请提货</block>
+  </view>
+
   <view class="card">
     <view class="card-title">履约方式</view>
     <view

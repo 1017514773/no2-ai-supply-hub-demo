@@ -1,6 +1,7 @@
 const orderApi = require('../../api/order');
 const cartApi = require('../../api/cart');
 const env = require('../../config/env');
+const C = require('../../config/constants');
 const fmt = require('../../utils/format');
 
 Page({
@@ -20,7 +21,10 @@ Page({
     submitting: false,
     showPay: false,
     createdOrder: null,
-    isGroup: false
+    isGroup: false,
+    isWholesale: true,
+    minOrderLabel: C.WHOLESALE.MIN_LABEL,
+    shortFen: 0
   },
 
   onLoad() {
@@ -32,7 +36,13 @@ Page({
       return;
     }
     this.checkout = payload;
-    this.setData({ isGroup: !!payload.groupId });
+    const isGroup = !!payload.groupId;
+    this.setData({
+      isGroup,
+      isWholesale: !isGroup,
+      // 批发订单默认登记仓内寄存（可随时申请提货）；团购参团维持原有默认
+      fulfillment: isGroup ? 'DELIVERY' : 'CONSIGN'
+    });
     this.preview();
   },
 
@@ -62,6 +72,7 @@ Page({
             freightFen: res.freightFen,
             payableFen: res.payableFen
           },
+          shortFen: Math.max(0, C.WHOLESALE.MIN_PRODUCT_AMOUNT_FEN - res.productAmountFen),
           address: res.address,
           pickupPoint: pickup,
           fulfillments: pickup
@@ -93,6 +104,19 @@ Page({
 
   onSubmit() {
     if (this.data.submitting || !this.checkout) return;
+    if (
+      this.data.isWholesale &&
+      this.data.amounts &&
+      this.data.amounts.productAmountFen < C.WHOLESALE.MIN_PRODUCT_AMOUNT_FEN
+    ) {
+      wx.showToast({
+        title:
+          '批发订单满 ' + C.WHOLESALE.MIN_LABEL + ' 起订，还差 ¥' +
+          fmt.fenToYuan(C.WHOLESALE.MIN_PRODUCT_AMOUNT_FEN - this.data.amounts.productAmountFen),
+        icon: 'none'
+      });
+      return;
+    }
     if (this.data.fulfillment === 'DELIVERY' && !this.data.address) {
       wx.showToast({ title: '请先选择收货地址', icon: 'none' });
       return;

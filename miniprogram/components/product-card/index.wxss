@@ -32,6 +32,17 @@
   padding: 2rpx 12rpx;
   font-size: 20rpx;
 }
+/* 批发标识：全站商品均为批发直供，单笔满 ¥1000 起订 */
+.visual .ws-tag {
+  position: absolute;
+  right: 16rpx;
+  top: 16rpx;
+  background: var(--green);
+  color: #fff;
+  border-radius: 10rpx;
+  padding: 2rpx 12rpx;
+  font-size: 20rpx;
+}
 .pbody {
   padding: 18rpx 20rpx 22rpx;
 }
